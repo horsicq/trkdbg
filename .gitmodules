@@ -1,0 +1,51 @@
+[submodule "XShortcuts"]
+	path = XShortcuts
+	url = https://github.com/horsicq/XShortcuts.git
+[submodule "XOptions"]
+	path = XOptions
+	url = https://github.com/horsicq/XOptions.git
+[submodule "Formats"]
+	path = Formats
+	url = https://github.com/horsicq/Formats.git
+[submodule "XArchive"]
+	path = XArchive
+	url = https://github.com/horsicq/XArchive.git
+[submodule "SpecAbstract"]
+	path = SpecAbstract
+	url = https://github.com/horsicq/SpecAbstract.git
+[submodule "XQwt"]
+	path = XQwt
+	url = https://github.com/horsicq/XQwt.git
+[submodule "XStyles"]
+	path = XStyles
+	url = https://github.com/horsicq/XStyles.git
+[submodule "XTranslation"]
+	path = XTranslation
+	url = https://github.com/horsicq/XTranslation.git
+[submodule "XCapstone"]
+	path = XCapstone
+	url = https://github.com/horsicq/XCapstone.git
+[submodule "XHexView"]
+	path = XHexView
+	url = https://github.com/horsicq/XHexView.git
+[submodule "XDisasmView"]
+	path = XDisasmView
+	url = https://github.com/horsicq/XDisasmView.git
+[submodule "Controls"]
+	path = Controls
+	url = https://github.com/horsicq/Controls.git
+[submodule "FormatWidgets"]
+	path = FormatWidgets
+	url = https://github.com/horsicq/FormatWidgets.git
+[submodule "FormatDialogs"]
+	path = FormatDialogs
+	url = https://github.com/horsicq/FormatDialogs.git
+[submodule "XSingleApplication"]
+	path = XSingleApplication
+	url = https://github.com/horsicq/XSingleApplication.git
+[submodule "XGithub"]
+	path = XGithub
+	url = https://github.com/horsicq/XGithub.git
+[submodule "XProcess"]
+	path = XProcess
+	url = https://github.com/horsicq/XProcess.git
