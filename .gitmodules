@@ -49,3 +49,6 @@
 [submodule "XProcess"]
 	path = XProcess
 	url = https://github.com/horsicq/XProcess.git
+[submodule "XHexEdit"]
+	path = XHexEdit
+	url = https://github.com/horsicq/XHexEdit.git
