@@ -24,6 +24,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include "xoptions.h"
+#include "xdebugscript.h"
 #ifdef Q_OS_WIN
 #include "xwindowsdebugger.h"
 #endif
@@ -50,9 +51,11 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("file","The file to open.");
 
-    QCommandLineOption clShowWindow         (QStringList()<<    "w"<<   "showwindow",   "Show window.");
+    QCommandLineOption clShowConsole        (QStringList()<<    "c"<<   "showconsole",  "Show console(If target is a console application).");
+    QCommandLineOption clScript             (QStringList()<<    "s"<<   "script",       "Script <script_file_path>.","script_file_path");
 
-    parser.addOption(clShowWindow);
+    parser.addOption(clShowConsole);
+    parser.addOption(clScript);
 
     parser.process(app);
 
@@ -69,12 +72,27 @@ int main(int argc, char *argv[])
 
         XAbstractDebugger::OPTIONS options={};
 
-        options.bShowWindow=true;
+        options.bShowConsole=parser.isSet(clShowConsole);
         options.sFileName=listArgs.at(0);
         options.bBreakpointOnTargetEntryPoint=true;
 
         debugger.setOptions(options);
-        debugger.load();
+
+        QString sScript=parser.value(clScript);
+
+        if(XBinary::isFileExists(sScript))
+        {
+            XDebugScript debugScript;
+
+            if(debugScript.setData(&debugger,sScript))
+            {
+                debugger.load();
+            }
+        }
+        else
+        {
+            // TODO Error
+        }
     }
     else
     {
