@@ -5,7 +5,7 @@ include(../build.pri)
 
 CONFIG += c++11
 
-TARGET = trksbgc
+TARGET = trkdbgc
 CONFIG += console
 CONFIG -= app_bundle
 
