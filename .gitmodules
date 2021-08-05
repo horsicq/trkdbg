@@ -73,3 +73,6 @@
 [submodule "XDebugScript"]
 	path = XDebugScript
 	url = https://github.com/horsicq/XDebugScript
+[submodule "XSpecDebugger"]
+	path = XSpecDebugger
+	url = https://github.com/horsicq/XSpecDebugger
