@@ -79,3 +79,9 @@
 [submodule "XDebuggerWidget"]
 	path = XDebuggerWidget
 	url = https://github.com/horsicq/XDebuggerWidget
+[submodule "XRegistersView"]
+	path = XRegistersView
+	url = https://github.com/horsicq/XRegistersView
+[submodule "XStackView"]
+	path = XStackView
+	url = https://github.com/horsicq/XStackView
