@@ -1,4 +1,8 @@
-TEMPLATE      = subdirs
+TEMPLATE        = subdirs
+SUBDIRS         += build_libs
+SUBDIRS         += console_source
+SUBDIRS         += gui_source
 
-SUBDIRS += gui_source
-#SUBDIRS += console_source
+target.path = $$PWD
+target.commands = bash -x $$PWD/install.sh
+INSTALLS += target
