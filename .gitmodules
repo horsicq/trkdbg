@@ -76,3 +76,6 @@
 [submodule "XSpecDebugger"]
 	path = XSpecDebugger
 	url = https://github.com/horsicq/XSpecDebugger
+[submodule "XDebuggerWidget"]
+	path = XDebuggerWidget
+	url = https://github.com/horsicq/XDebuggerWidget
