@@ -18,12 +18,12 @@ FORMS += \
 
 !contains(XCONFIG, xdebuggerwidget) {
     XCONFIG += xdebuggerwidget
-    include(../../_mylibs/XDebuggerWidget/xdebuggerwidget.pri)
+    include(../XDebuggerWidget/xdebuggerwidget.pri)
 }
 
 !contains(XCONFIG, xoptions) {
     XCONFIG += xoptions
-    include(../../_mylibs/XOptions/xoptions.pri)
+    include(../XOptions/xoptions.pri)
 }
 
 include(../build.pri)
