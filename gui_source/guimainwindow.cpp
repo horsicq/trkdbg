@@ -125,5 +125,12 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
 
 void GuiMainWindow::on_actionOpen_triggered()
 {
-    // TODO
+    QString sDirectory=g_xOptions.getLastDirectory();
+
+    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)")); // TODO extension
+
+    if(!sFileName.isEmpty())
+    {
+        handleFile(sFileName);
+    }
 }
