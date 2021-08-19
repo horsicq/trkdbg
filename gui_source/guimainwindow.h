@@ -46,6 +46,8 @@ private slots:
     void handleFile(QString sFileName);
     void adjust();
     void on_actionOpen_triggered();
+    void _open();
+    void _exit();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;

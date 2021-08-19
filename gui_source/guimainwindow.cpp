@@ -56,6 +56,9 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 
     ui->widgetDebugger->setShortcuts(&g_xShortcuts);
 
+    ui->actionOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_OPEN));
+    ui->actionExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_EXIT));
+
     if(QCoreApplication::arguments().count()>1)
     {
         handleFile(QCoreApplication::arguments().at(1));
@@ -72,8 +75,7 @@ GuiMainWindow::~GuiMainWindow()
 
 void GuiMainWindow::on_actionExit_triggered()
 {
-    // TODO
-    this->close();
+    _exit();
 }
 
 void GuiMainWindow::handleFile(QString sFileName)
@@ -125,6 +127,11 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
 
 void GuiMainWindow::on_actionOpen_triggered()
 {
+    _open();
+}
+
+void GuiMainWindow::_open()
+{
     QString sDirectory=g_xOptions.getLastDirectory();
 
     QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)")); // TODO extension
@@ -133,4 +140,10 @@ void GuiMainWindow::on_actionOpen_triggered()
     {
         handleFile(sFileName);
     }
+}
+
+void GuiMainWindow::_exit()
+{
+    // TODO
+    this->close();
 }
