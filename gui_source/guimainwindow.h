@@ -27,7 +27,7 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 #include "xoptions.h"
-#include "xshortcuts.h"
+#include "dialogshortcuts.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GuiMainWindow; }
@@ -41,6 +41,8 @@ public:
     GuiMainWindow(QWidget *pParent=nullptr);
     ~GuiMainWindow();
 
+    void setShortcuts();
+
 private slots:
     void on_actionExit_triggered();
     void handleFile(QString sFileName);
@@ -48,6 +50,9 @@ private slots:
     void on_actionOpen_triggered();
     void _open();
     void _exit();
+    void on_actionOptions_triggered();
+    void on_actionShortcuts_triggered();
+    void on_actionAbout_triggered();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;

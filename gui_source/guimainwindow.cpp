@@ -56,8 +56,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 
     ui->widgetDebugger->setShortcuts(&g_xShortcuts);
 
-    ui->actionOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_OPEN));
-    ui->actionExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_EXIT));
+    setShortcuts();
 
     if(QCoreApplication::arguments().count()>1)
     {
@@ -71,6 +70,12 @@ GuiMainWindow::~GuiMainWindow()
     g_xShortcuts.save();
 
     delete ui;
+}
+
+void GuiMainWindow::setShortcuts()
+{
+    ui->actionOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_OPEN));
+    ui->actionExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_EXIT));
 }
 
 void GuiMainWindow::on_actionExit_triggered()
@@ -147,3 +152,25 @@ void GuiMainWindow::_exit()
     // TODO
     this->close();
 }
+
+void GuiMainWindow::on_actionOptions_triggered()
+{
+    // TODO
+}
+
+void GuiMainWindow::on_actionShortcuts_triggered()
+{
+    DialogShortcuts dialogShortcuts(this);
+
+    dialogShortcuts.setData(&g_xShortcuts);
+
+    dialogShortcuts.exec();
+
+    setShortcuts();
+}
+
+void GuiMainWindow::on_actionAbout_triggered()
+{
+    // TODO
+}
+
