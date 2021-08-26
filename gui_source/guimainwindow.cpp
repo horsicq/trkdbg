@@ -75,6 +75,8 @@ GuiMainWindow::~GuiMainWindow()
 void GuiMainWindow::setShortcuts()
 {
     ui->actionOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_OPEN));
+    ui->actionAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_ATTACH));
+    ui->actionDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DETACH));
     ui->actionExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_EXIT));
 }
 
@@ -153,6 +155,16 @@ void GuiMainWindow::_exit()
     this->close();
 }
 
+void GuiMainWindow::_attach()
+{
+    // TODO
+}
+
+void GuiMainWindow::_detach()
+{
+    // TODO
+}
+
 void GuiMainWindow::on_actionOptions_triggered()
 {
     // TODO
@@ -174,3 +186,13 @@ void GuiMainWindow::on_actionAbout_triggered()
     // TODO
 }
 
+
+void GuiMainWindow::on_actionAttach_triggered()
+{
+    _attach();
+}
+
+void GuiMainWindow::on_actionDetach_triggered()
+{
+    _detach();
+}

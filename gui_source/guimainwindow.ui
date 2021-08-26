@@ -38,7 +38,7 @@
      <x>0</x>
      <y>0</y>
      <width>916</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -46,6 +46,8 @@
      <string>File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionAttach"/>
+    <addaction name="actionDetach"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
@@ -61,7 +63,25 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuTracing">
+    <property name="title">
+     <string>Tracing</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuView"/>
+   <addaction name="menuDebug"/>
+   <addaction name="menuTracing"/>
    <addaction name="menuTools"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -89,6 +109,16 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionAttach">
+   <property name="text">
+    <string>Attach</string>
+   </property>
+  </action>
+  <action name="actionDetach">
+   <property name="text">
+    <string>Detach</string>
    </property>
   </action>
  </widget>

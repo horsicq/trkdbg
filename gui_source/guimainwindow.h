@@ -50,9 +50,13 @@ private slots:
     void on_actionOpen_triggered();
     void _open();
     void _exit();
+    void _attach();
+    void _detach();
     void on_actionOptions_triggered();
     void on_actionShortcuts_triggered();
     void on_actionAbout_triggered();
+    void on_actionAttach_triggered();
+    void on_actionDetach_triggered();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
