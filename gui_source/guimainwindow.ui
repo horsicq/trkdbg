@@ -67,6 +67,14 @@
     <property name="title">
      <string>View</string>
     </property>
+    <addaction name="actionViewCPU"/>
+    <addaction name="actionViewActions"/>
+    <addaction name="actionViewLog"/>
+    <addaction name="actionViewBreakpoint"/>
+    <addaction name="actionViewMemoryMap"/>
+    <addaction name="actionViewCallStack"/>
+    <addaction name="actionViewThreads"/>
+    <addaction name="actionViewHandles"/>
    </widget>
    <widget class="QMenu" name="menuDebug">
     <property name="title">
@@ -137,6 +145,52 @@
   <action name="actionDebugStepOver">
    <property name="text">
     <string>Step over</string>
+   </property>
+  </action>
+  <action name="actionViewCPU">
+   <property name="text">
+    <string>CPU</string>
+   </property>
+  </action>
+  <action name="actionViewActions">
+   <property name="text">
+    <string>Actions</string>
+   </property>
+  </action>
+  <action name="actionViewLog">
+   <property name="text">
+    <string>Log</string>
+   </property>
+  </action>
+  <action name="actionViewBreakpoint">
+   <property name="text">
+    <string>Breakpoints</string>
+   </property>
+  </action>
+  <action name="actionViewMemoryMap">
+   <property name="text">
+    <string>Memory map</string>
+   </property>
+   <property name="toolTip">
+    <string>Memory map</string>
+   </property>
+  </action>
+  <action name="actionViewCallStack">
+   <property name="text">
+    <string>Call stack</string>
+   </property>
+   <property name="toolTip">
+    <string>Call stack</string>
+   </property>
+  </action>
+  <action name="actionViewThreads">
+   <property name="text">
+    <string>Threads</string>
+   </property>
+  </action>
+  <action name="actionViewHandles">
+   <property name="text">
+    <string>Handles</string>
    </property>
   </action>
  </widget>

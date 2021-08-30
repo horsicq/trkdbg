@@ -55,6 +55,14 @@ private slots:
     void on_actionToolsOptions_triggered();
     void on_actionToolsShortcuts_triggered();
     void on_actionHelpAbout_triggered();
+    void on_actionViewCPU_triggered();
+    void on_actionViewActions_triggered();
+    void on_actionViewLog_triggered();
+    void on_actionViewBreakpoint_triggered();
+    void on_actionViewMemoryMap_triggered();
+    void on_actionViewCallStack_triggered();
+    void on_actionViewThreads_triggered();
+    void on_actionViewHandles_triggered();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;

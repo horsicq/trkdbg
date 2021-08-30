@@ -194,3 +194,43 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
         }
     }
 }
+
+void GuiMainWindow::on_actionViewCPU_triggered()
+{
+    ui->widgetDebugger->viewCPU();
+}
+
+void GuiMainWindow::on_actionViewActions_triggered()
+{
+    ui->widgetDebugger->viewActions();
+}
+
+void GuiMainWindow::on_actionViewLog_triggered()
+{
+    ui->widgetDebugger->viewLog();
+}
+
+void GuiMainWindow::on_actionViewBreakpoint_triggered()
+{
+    ui->widgetDebugger->viewBreakpoints();
+}
+
+void GuiMainWindow::on_actionViewMemoryMap_triggered()
+{
+    ui->widgetDebugger->viewMemoryMap();
+}
+
+void GuiMainWindow::on_actionViewCallStack_triggered()
+{
+    ui->widgetDebugger->viewCallstack();
+}
+
+void GuiMainWindow::on_actionViewThreads_triggered()
+{
+    ui->widgetDebugger->viewThreads();
+}
+
+void GuiMainWindow::on_actionViewHandles_triggered()
+{
+    ui->widgetDebugger->viewHandles();
+}
