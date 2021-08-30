@@ -74,15 +74,56 @@ GuiMainWindow::~GuiMainWindow()
 
 void GuiMainWindow::setShortcuts()
 {
-    ui->actionOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_OPEN));
-    ui->actionAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_ATTACH));
-    ui->actionDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DETACH));
-    ui->actionExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_EXIT));
+    ui->actionFileOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_OPEN));
+    ui->actionFileAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
+    ui->actionFileDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
+    ui->actionFileExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
+
+    ui->actionDebugRun->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
+    ui->actionDebugStepInto->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
+    ui->actionDebugStepOver->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
 }
 
-void GuiMainWindow::on_actionExit_triggered()
+void GuiMainWindow::on_actionFileExit_triggered()
 {
-    _exit();
+    // TODO
+    this->close();
+}
+
+void GuiMainWindow::on_actionDebugRun_triggered()
+{
+    ui->widgetDebugger->debugRun();
+}
+
+void GuiMainWindow::on_actionDebugStepInto_triggered()
+{
+    ui->widgetDebugger->debugStepInto();
+}
+
+void GuiMainWindow::on_actionDebugStepOver_triggered()
+{
+    ui->widgetDebugger->debugStepOver();
+}
+
+void GuiMainWindow::on_actionToolsOptions_triggered()
+{
+    // TODO
+}
+
+void GuiMainWindow::on_actionToolsShortcuts_triggered()
+{
+    DialogShortcuts dialogShortcuts(this);
+
+    dialogShortcuts.setData(&g_xShortcuts);
+
+    dialogShortcuts.exec();
+
+    setShortcuts();
+}
+
+void GuiMainWindow::on_actionHelpAbout_triggered()
+{
+    // TODO
 }
 
 void GuiMainWindow::handleFile(QString sFileName)
@@ -101,6 +142,28 @@ void GuiMainWindow::handleFile(QString sFileName)
 void GuiMainWindow::adjust()
 {
     g_xOptions.adjustStayOnTop(this);
+}
+
+void GuiMainWindow::on_actionFileOpen_triggered()
+{
+    QString sDirectory=g_xOptions.getLastDirectory();
+
+    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)")); // TODO extension
+
+    if(!sFileName.isEmpty())
+    {
+        handleFile(sFileName);
+    }
+}
+
+void GuiMainWindow::on_actionFileAttach_triggered()
+{
+    // TODO
+}
+
+void GuiMainWindow::on_actionFileDetach_triggered()
+{
+    // TODO
 }
 
 void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent)
@@ -130,69 +193,4 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
             handleFile(sFileName);
         }
     }
-}
-
-void GuiMainWindow::on_actionOpen_triggered()
-{
-    _open();
-}
-
-void GuiMainWindow::_open()
-{
-    QString sDirectory=g_xOptions.getLastDirectory();
-
-    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)")); // TODO extension
-
-    if(!sFileName.isEmpty())
-    {
-        handleFile(sFileName);
-    }
-}
-
-void GuiMainWindow::_exit()
-{
-    // TODO
-    this->close();
-}
-
-void GuiMainWindow::_attach()
-{
-    // TODO
-}
-
-void GuiMainWindow::_detach()
-{
-    // TODO
-}
-
-void GuiMainWindow::on_actionOptions_triggered()
-{
-    // TODO
-}
-
-void GuiMainWindow::on_actionShortcuts_triggered()
-{
-    DialogShortcuts dialogShortcuts(this);
-
-    dialogShortcuts.setData(&g_xShortcuts);
-
-    dialogShortcuts.exec();
-
-    setShortcuts();
-}
-
-void GuiMainWindow::on_actionAbout_triggered()
-{
-    // TODO
-}
-
-
-void GuiMainWindow::on_actionAttach_triggered()
-{
-    _attach();
-}
-
-void GuiMainWindow::on_actionDetach_triggered()
-{
-    _detach();
 }

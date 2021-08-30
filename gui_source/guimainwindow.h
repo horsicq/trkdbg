@@ -40,23 +40,21 @@ class GuiMainWindow : public QMainWindow
 public:
     GuiMainWindow(QWidget *pParent=nullptr);
     ~GuiMainWindow();
-
     void setShortcuts();
 
 private slots:
-    void on_actionExit_triggered();
     void handleFile(QString sFileName);
     void adjust();
-    void on_actionOpen_triggered();
-    void _open();
-    void _exit();
-    void _attach();
-    void _detach();
-    void on_actionOptions_triggered();
-    void on_actionShortcuts_triggered();
-    void on_actionAbout_triggered();
-    void on_actionAttach_triggered();
-    void on_actionDetach_triggered();
+    void on_actionFileOpen_triggered();
+    void on_actionFileAttach_triggered();
+    void on_actionFileDetach_triggered();
+    void on_actionFileExit_triggered();
+    void on_actionDebugRun_triggered();
+    void on_actionDebugStepInto_triggered();
+    void on_actionDebugStepOver_triggered();
+    void on_actionToolsOptions_triggered();
+    void on_actionToolsShortcuts_triggered();
+    void on_actionHelpAbout_triggered();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;

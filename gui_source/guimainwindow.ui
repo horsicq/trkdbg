@@ -45,23 +45,23 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionOpen"/>
-    <addaction name="actionAttach"/>
-    <addaction name="actionDetach"/>
-    <addaction name="actionExit"/>
+    <addaction name="actionFileOpen"/>
+    <addaction name="actionFileAttach"/>
+    <addaction name="actionFileDetach"/>
+    <addaction name="actionFileExit"/>
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Tools</string>
     </property>
-    <addaction name="actionOptions"/>
-    <addaction name="actionShortcuts"/>
+    <addaction name="actionToolsOptions"/>
+    <addaction name="actionToolsShortcuts"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionAbout"/>
+    <addaction name="actionHelpAbout"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -72,6 +72,9 @@
     <property name="title">
      <string>Debug</string>
     </property>
+    <addaction name="actionDebugRun"/>
+    <addaction name="actionDebugStepInto"/>
+    <addaction name="actionDebugStepOver"/>
    </widget>
    <widget class="QMenu" name="menuTracing">
     <property name="title">
@@ -86,39 +89,54 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionExit">
+  <action name="actionFileExit">
    <property name="text">
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionOpen">
+  <action name="actionFileOpen">
    <property name="text">
     <string>Open</string>
    </property>
   </action>
-  <action name="actionOptions">
+  <action name="actionToolsOptions">
    <property name="text">
     <string>Options</string>
    </property>
   </action>
-  <action name="actionShortcuts">
+  <action name="actionToolsShortcuts">
    <property name="text">
     <string>Shortcuts</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="actionHelpAbout">
    <property name="text">
     <string>About</string>
    </property>
   </action>
-  <action name="actionAttach">
+  <action name="actionFileAttach">
    <property name="text">
     <string>Attach</string>
    </property>
   </action>
-  <action name="actionDetach">
+  <action name="actionFileDetach">
    <property name="text">
     <string>Detach</string>
+   </property>
+  </action>
+  <action name="actionDebugRun">
+   <property name="text">
+    <string>Run</string>
+   </property>
+  </action>
+  <action name="actionDebugStepInto">
+   <property name="text">
+    <string>Step into</string>
+   </property>
+  </action>
+  <action name="actionDebugStepOver">
+   <property name="text">
+    <string>Step over</string>
    </property>
   </action>
  </widget>
