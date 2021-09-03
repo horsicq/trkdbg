@@ -85,3 +85,6 @@
 [submodule "XStackView"]
 	path = XStackView
 	url = https://github.com/horsicq/XStackView
+[submodule "XProcessMemoryMapWidget"]
+	path = XProcessMemoryMapWidget
+	url = https://github.com/horsicq/XProcessMemoryMapWidget
