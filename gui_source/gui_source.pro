@@ -7,13 +7,19 @@ TARGET = trkdbg
 CONFIG += c++11
 
 SOURCES += \
+    dialogabout.cpp \
+    dialogoptions.cpp \
     guimainwindow.cpp \
     main_gui.cpp
 
 HEADERS += \
+    dialogabout.h \
+    dialogoptions.h \
     guimainwindow.h
 
 FORMS += \
+    dialogabout.ui \
+    dialogoptions.ui \
     guimainwindow.ui
 
 !contains(XCONFIG, xdebuggerwidget) {

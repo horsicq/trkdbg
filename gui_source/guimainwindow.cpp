@@ -42,6 +42,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     listIDs.append(XOptions::ID_STAYONTOP);
     listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
     listIDs.append(XOptions::ID_SEARCHSIGNATURESPATH);
+    listIDs.append(XOptions::ID_DISASMSYNTAX);
 
     g_xOptions.setValueIDs(listIDs);
     g_xOptions.load();
