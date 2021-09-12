@@ -32,7 +32,7 @@ class DialogOptions : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogOptions(QWidget *parent = nullptr);
+    explicit DialogOptions(QWidget *pParent=nullptr);
     ~DialogOptions();
 
 private:
