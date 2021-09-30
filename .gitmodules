@@ -88,3 +88,12 @@
 [submodule "XProcessMemoryMapWidget"]
 	path = XProcessMemoryMapWidget
 	url = https://github.com/horsicq/XProcessMemoryMapWidget
+[submodule "XDynStructs"]
+	path = XDynStructs
+	url = https://github.com/horsicq/XDynStructs
+[submodule "XDynStructsEngine"]
+	path = XDynStructsEngine
+	url = https://github.com/horsicq/XDynStructsEngine
+[submodule "XDynStructsWidget"]
+	path = XDynStructsWidget
+	url = https://github.com/horsicq/XDynStructsWidget
