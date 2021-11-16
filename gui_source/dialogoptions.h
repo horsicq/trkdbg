@@ -22,6 +22,11 @@
 #define DIALOGOPTIONS_H
 
 #include <QDialog>
+#include <QSettings>
+#include <QDir>
+#include <QMessageBox>
+#include "xoptions.h"
+#include "../global.h"
 
 namespace Ui {
 class DialogOptions;
@@ -32,11 +37,16 @@ class DialogOptions : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogOptions(QWidget *pParent=nullptr);
+    explicit DialogOptions(QWidget *pParent,XOptions *pOptions);
     ~DialogOptions();
+
+private slots:
+    void on_pushButtonOK_clicked();
+    void on_pushButtonCancel_clicked();
 
 private:
     Ui::DialogOptions *ui;
+    XOptions *g_pOptions;
 };
 
 #endif // DIALOGOPTIONS_H

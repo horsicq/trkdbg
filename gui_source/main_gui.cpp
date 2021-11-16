@@ -54,13 +54,9 @@ int main(int argc, char *argv[])
 
     xOptions.setName(X_OPTIONSFILE);
 
-    QList<XOptions::ID> listIDs;
-
-    listIDs.append(XOptions::ID_STYLE);
-    listIDs.append(XOptions::ID_LANG);
-    listIDs.append(XOptions::ID_QSS);
-
-    xOptions.setValueIDs(listIDs);
+    xOptions.addID(XOptions::ID_STYLE);
+    xOptions.addID(XOptions::ID_LANG);
+    xOptions.addID(XOptions::ID_QSS);
     xOptions.load();
 
     XOptions::adjustApplicationView(X_APPLICATIONNAME,&xOptions);
