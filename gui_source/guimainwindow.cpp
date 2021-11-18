@@ -49,9 +49,9 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     g_xShortcuts.addGroup(XShortcuts::ID_DEBUGGER);
     g_xShortcuts.load();
 
-    adjust();
+    ui->widgetDebugger->setGlobal(&g_xShortcuts,&g_xOptions);
 
-    ui->widgetDebugger->setShortcuts(&g_xShortcuts);
+    adjust();
 
     setShortcuts();
 
