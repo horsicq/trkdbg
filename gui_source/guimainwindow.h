@@ -28,6 +28,7 @@
 #include <QMimeData>
 #include "xoptions.h"
 #include "dialogshortcuts.h"
+#include "dialogoptions.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GuiMainWindow; }

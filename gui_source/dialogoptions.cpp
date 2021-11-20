@@ -45,6 +45,8 @@ void DialogOptions::on_pushButtonOK_clicked()
     g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
     g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
 
+    // TODO MessageBox
+
     this->close();
 }
 

@@ -113,7 +113,11 @@ void GuiMainWindow::on_actionDebugStepOver_triggered()
 
 void GuiMainWindow::on_actionToolsOptions_triggered()
 {
-    // TODO
+    DialogOptions dialogOptions(this,&g_xOptions);
+
+    dialogOptions.exec();
+
+    adjust();
 }
 
 void GuiMainWindow::on_actionToolsShortcuts_triggered()
