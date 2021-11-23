@@ -41,6 +41,9 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     g_xOptions.addID(XOptions::ID_SAVELASTDIRECTORY);
     g_xOptions.addID(XOptions::ID_SEARCHSIGNATURESPATH);
     g_xOptions.addID(XOptions::ID_DISASMSYNTAX);
+    g_xOptions.addID(XOptions::ID_BREAKPOINT_ENTRYPOINT,true);
+    g_xOptions.addID(XOptions::ID_BREAKPOINT_DLLMAIN,true);
+    g_xOptions.addID(XOptions::ID_BREAKPOINT_TLSFUNCTIONS,true);
     g_xOptions.load();
 
     g_xShortcuts.setName(X_SHORTCUTSFILE);

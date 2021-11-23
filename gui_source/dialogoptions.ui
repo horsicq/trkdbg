@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>307</width>
-    <height>272</height>
+    <width>351</width>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,14 +61,44 @@
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer_5">
+    <widget class="QGroupBox" name="groupBoxBreakpoints">
+     <property name="title">
+      <string>Breakpoints</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBoxBreakpoint_EntryPoint">
+        <property name="text">
+         <string>Entry point</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBoxBreakpoint_DLLMain">
+        <property name="text">
+         <string notr="true">DLLMain</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBoxBreakpoint_TLSFunctions">
+        <property name="text">
+         <string notr="true">TLS functions</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>129</height>
+       <height>40</height>
       </size>
      </property>
     </spacer>

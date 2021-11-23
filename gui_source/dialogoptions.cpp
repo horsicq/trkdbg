@@ -32,6 +32,10 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
     g_pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
     g_pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
     g_pOptions->setComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
+
+    g_pOptions->setCheckBox(ui->checkBoxBreakpoint_EntryPoint,XOptions::ID_BREAKPOINT_ENTRYPOINT);
+    g_pOptions->setCheckBox(ui->checkBoxBreakpoint_DLLMain,XOptions::ID_BREAKPOINT_DLLMAIN);
+    g_pOptions->setCheckBox(ui->checkBoxBreakpoint_TLSFunctions,XOptions::ID_BREAKPOINT_TLSFUNCTIONS);
 }
 
 DialogOptions::~DialogOptions()
@@ -44,6 +48,10 @@ void DialogOptions::on_pushButtonOK_clicked()
     g_pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
     g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
     g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
+
+    g_pOptions->getCheckBox(ui->checkBoxBreakpoint_EntryPoint,XOptions::ID_BREAKPOINT_ENTRYPOINT);
+    g_pOptions->getCheckBox(ui->checkBoxBreakpoint_DLLMain,XOptions::ID_BREAKPOINT_DLLMAIN);
+    g_pOptions->getCheckBox(ui->checkBoxBreakpoint_TLSFunctions,XOptions::ID_BREAKPOINT_TLSFUNCTIONS);
 
     // TODO MessageBox
 
