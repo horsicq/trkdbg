@@ -4,6 +4,10 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = trkdbg
 
+macx {
+    TARGET = TRKDBG
+}
+
 CONFIG += c++11
 
 SOURCES += \
