@@ -26,6 +26,12 @@
 #include <QDir>
 #include <QMessageBox>
 #include "xoptions.h"
+#include "xbinary.h"
+//#include "staticscanoptionswidget.h"
+#include "searchsignaturesoptionswidget.h"
+#include "xhexviewoptionswidget.h"
+#include "xdisasmviewoptionswidget.h"
+#include "xdebuggeroptionswidget.h"
 #include "../global.h"
 
 namespace Ui {
@@ -46,6 +52,11 @@ private slots:
 
 private:
     Ui::DialogOptions *ui;
+//    StaticScanOptionsWidget *g_pStaticScanOptionsWidget;
+    SearchSignaturesOptionsWidget *g_pSearchSignaturesOptionsWidget;
+    XHexViewOptionsWidget *g_pXHexViewOptionsWidget;
+    XDisasmViewOptionsWidget *g_pXDisasmViewOptionsWidget;
+    XDebuggerOptionsWidget *g_pXDebuggerOptionsWidget;
     XOptions *g_pOptions;
 };
 

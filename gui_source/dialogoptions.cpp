@@ -29,13 +29,30 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
 
     this->g_pOptions=pOptions;
 
-    g_pOptions->setCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-    g_pOptions->setCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-    g_pOptions->setComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
+//    g_pStaticScanOptionsWidget=new StaticScanOptionsWidget(this);
+    g_pSearchSignaturesOptionsWidget=new SearchSignaturesOptionsWidget(this);
+    g_pXHexViewOptionsWidget=new XHexViewOptionsWidget(this);
+    g_pXDisasmViewOptionsWidget=new XDisasmViewOptionsWidget(this);
+    g_pXDebuggerOptionsWidget=new XDebuggerOptionsWidget(this);
 
-    g_pOptions->setCheckBox(ui->checkBoxBreakpoint_EntryPoint,XOptions::ID_DEBUGGER_BREAKPOINT_ENTRYPOINT);
-    g_pOptions->setCheckBox(ui->checkBoxBreakpoint_DLLMain,XOptions::ID_DEBUGGER_BREAKPOINT_DLLMAIN);
-    g_pOptions->setCheckBox(ui->checkBoxBreakpoint_TLSFunctions,XOptions::ID_DEBUGGER_BREAKPOINT_TLSFUNCTIONS);
+    ui->widgetOptions->setOptions(pOptions,X_APPLICATIONDISPLAYNAME);
+
+//    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget,tr("Scan"));
+//    g_pStaticScanOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->addPage(g_pSearchSignaturesOptionsWidget,tr("Signatures"));
+    g_pSearchSignaturesOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->addPage(g_pXHexViewOptionsWidget,tr("Hex"));
+    g_pXHexViewOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->addPage(g_pXDisasmViewOptionsWidget,tr("Disasm"));
+    g_pXDisasmViewOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->addPage(g_pXDebuggerOptionsWidget,tr("Debugger"));
+    g_pXDebuggerOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->setCurrentPage(1);
 }
 
 DialogOptions::~DialogOptions()
@@ -45,15 +62,17 @@ DialogOptions::~DialogOptions()
 
 void DialogOptions::on_pushButtonOK_clicked()
 {
-    g_pOptions->getCheckBox(ui->checkBoxSaveLastDirectory,XOptions::ID_SAVELASTDIRECTORY);
-    g_pOptions->getCheckBox(ui->checkBoxStayOnTop,XOptions::ID_STAYONTOP);
-    g_pOptions->getComboBox(ui->comboBoxStyle,XOptions::ID_STYLE);
+    ui->widgetOptions->save();
+//    g_pStaticScanOptionsWidget->save();
+    g_pSearchSignaturesOptionsWidget->save();
+    g_pXHexViewOptionsWidget->save();
+    g_pXDisasmViewOptionsWidget->save();
+    g_pXDebuggerOptionsWidget->save();
 
-    g_pOptions->getCheckBox(ui->checkBoxBreakpoint_EntryPoint,XOptions::ID_DEBUGGER_BREAKPOINT_ENTRYPOINT);
-    g_pOptions->getCheckBox(ui->checkBoxBreakpoint_DLLMain,XOptions::ID_DEBUGGER_BREAKPOINT_DLLMAIN);
-    g_pOptions->getCheckBox(ui->checkBoxBreakpoint_TLSFunctions,XOptions::ID_DEBUGGER_BREAKPOINT_TLSFUNCTIONS);
-
-    // TODO MessageBox
+    if(g_pOptions->isRestartNeeded())
+    {
+        QMessageBox::information(this,tr("Information"),tr("Please restart the application"));
+    }
 
     this->close();
 }

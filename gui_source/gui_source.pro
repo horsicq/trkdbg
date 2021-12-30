@@ -31,9 +31,9 @@ FORMS += \
     include(../XDebuggerWidget/xdebuggerwidget.pri)
 }
 
-!contains(XCONFIG, xoptions) {
-    XCONFIG += xoptions
-    include(../XOptions/xoptions.pri)
+!contains(XCONFIG, xoptionswidget) {
+    XCONFIG += xoptionswidget
+    include(../XOptions/xoptionswidget.pri)
 }
 
 include(../build.pri)

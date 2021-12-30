@@ -33,15 +33,24 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 
     g_xOptions.setName(X_OPTIONSFILE);
 
-    g_xOptions.addID(XOptions::ID_STYLE);
-    g_xOptions.addID(XOptions::ID_QSS);
-    g_xOptions.addID(XOptions::ID_LANG);
-    g_xOptions.addID(XOptions::ID_STAYONTOP);
-    g_xOptions.addID(XOptions::ID_SAVELASTDIRECTORY);
-    g_xOptions.addID(XOptions::ID_DISASM_SYNTAX);
-    g_xOptions.addID(XOptions::ID_DEBUGGER_BREAKPOINT_ENTRYPOINT,true);
-    g_xOptions.addID(XOptions::ID_DEBUGGER_BREAKPOINT_DLLMAIN,true);
-    g_xOptions.addID(XOptions::ID_DEBUGGER_BREAKPOINT_TLSFUNCTIONS,true);
+    g_xOptions.addID(XOptions::ID_VIEW_STYLE,"Fusion");
+    g_xOptions.addID(XOptions::ID_VIEW_QSS,"");
+    g_xOptions.addID(XOptions::ID_VIEW_LANG,"System");
+    g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP,false);
+    g_xOptions.addID(XOptions::ID_VIEW_SHOWLOGO,true);
+    g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
+    g_xOptions.addID(XOptions::ID_FILE_SAVEBACKUP,true);
+
+#ifdef Q_OS_WIN
+    g_xOptions.addID(XOptions::ID_FILE_CONTEXT,"*");
+#endif
+
+//    StaticScanOptionsWidget::setDefaultValues(&g_xOptions);
+    SearchSignaturesOptionsWidget::setDefaultValues(&g_xOptions);
+    XHexViewOptionsWidget::setDefaultValues(&g_xOptions);
+    XDisasmViewOptionsWidget::setDefaultValues(&g_xOptions);
+    XDebuggerOptionsWidget::setDefaultValues(&g_xOptions);
+
     g_xOptions.load();
 
     g_xShortcuts.setName(X_SHORTCUTSFILE);
