@@ -106,3 +106,27 @@
 [submodule "XPDF"]
 	path = XPDF
 	url = https://github.com/horsicq/XPDF
+[submodule "StaticScan"]
+	path = StaticScan
+	url = https://github.com/horsicq/StaticScan
+[submodule "XDEX"]
+	path = XDEX
+	url = https://github.com/horsicq/XDEX
+[submodule "XHashWidget"]
+	path = XHashWidget
+	url = https://github.com/horsicq/XHashWidget
+[submodule "XDisasm"]
+	path = XDisasm
+	url = https://github.com/horsicq/XDisasm
+[submodule "archive_widget"]
+	path = archive_widget
+	url = https://github.com/horsicq/archive_widget
+[submodule "QHexView"]
+	path = QHexView
+	url = https://github.com/horsicq/QHexView
+[submodule "XEntropyWidget"]
+	path = XEntropyWidget
+	url = https://github.com/horsicq/XEntropyWidget
+[submodule "XMemoryMapWidget"]
+	path = XMemoryMapWidget
+	url = https://github.com/horsicq/XMemoryMapWidget
