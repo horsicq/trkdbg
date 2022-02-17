@@ -61,7 +61,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 
     ui->widgetDebugger->setGlobal(&g_xShortcuts,&g_xOptions);
 
-    adjust();
+    adjustWindow();
 
     setShortcuts();
 
@@ -127,7 +127,7 @@ void GuiMainWindow::on_actionToolsOptions_triggered()
 
     dialogOptions.exec();
 
-    adjust();
+    adjustWindow();
 }
 
 void GuiMainWindow::on_actionToolsShortcuts_triggered()
@@ -159,9 +159,10 @@ void GuiMainWindow::handleFile(QString sFileName)
     }
 }
 
-void GuiMainWindow::adjust()
+void GuiMainWindow::adjustWindow()
 {
     g_xOptions.adjustStayOnTop(this);
+    ui->widgetDebugger->adjustView();
 }
 
 void GuiMainWindow::on_actionFileOpen_triggered()

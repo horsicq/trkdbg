@@ -45,7 +45,7 @@ public:
 
 private slots:
     void handleFile(QString sFileName);
-    void adjust();
+    void adjustWindow();
     void on_actionFileOpen_triggered();
     void on_actionFileAttach_triggered();
     void on_actionFileDetach_triggered();
