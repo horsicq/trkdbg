@@ -22,9 +22,9 @@
 #define DIALOGOPTIONS_H
 
 #include <QDialog>
-#include <QSettings>
 #include <QDir>
 #include <QMessageBox>
+#include <QSettings>
 #include "xoptions.h"
 #include "xbinary.h"
 //#include "staticscanoptionswidget.h"
