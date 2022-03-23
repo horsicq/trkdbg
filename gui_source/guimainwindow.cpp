@@ -87,6 +87,7 @@ GuiMainWindow::~GuiMainWindow()
 void GuiMainWindow::setShortcuts()
 {
     menuAction[MA_FILE_OPEN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_OPEN));
+    menuAction[MA_FILE_CLOSE]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_CLOSE));
 //    ui->actionFileAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
 //    ui->actionFileDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
 //    ui->actionFileExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
@@ -121,9 +122,8 @@ void GuiMainWindow::createMenus()
     ui->menubar->addAction(pMenuTools->menuAction());
     ui->menubar->addAction(pMenuHelp->menuAction());
 
-//    QAction *pActionOpen=new QAction(tr("Open"),this);
     menuAction[MA_FILE_OPEN]=new QAction(tr("Open"),this);
-//    QAction *pActionClose=new QAction(tr("Close"),this);
+    menuAction[MA_FILE_CLOSE]=new QAction(tr("Close"),this);
 //    QAction *pActionExit=new QAction(tr("Exit"),this);
 //    QAction *pActionOptions=new QAction(tr("Options"),this);
 //    QAction *pActionAbout=new QAction(tr("About"),this);
@@ -132,6 +132,7 @@ void GuiMainWindow::createMenus()
 
     pMenuFile->addAction(menuAction[MA_FILE_OPEN]);
     pMenuFile->addMenu(g_xOptions.createRecentFilesMenu(this));
+    pMenuFile->addAction(menuAction[MA_FILE_CLOSE]);
 //    pMenuFile->addAction(pActionClose);
 //    pMenuFile->addAction(pActionExit);
 //    pMenuTools->addAction(pActionDemangle);
@@ -140,6 +141,7 @@ void GuiMainWindow::createMenus()
 //    pMenuHelp->addAction(pActionAbout);
 
     connect(menuAction[MA_FILE_OPEN],SIGNAL(triggered()),this,SLOT(actionFileOpen()));
+    connect(menuAction[MA_FILE_CLOSE],SIGNAL(triggered()),this,SLOT(actionFileClose()));
 //    connect(pActionClose,SIGNAL(triggered()),this,SLOT(actionCloseSlot()));
 //    connect(pActionExit,SIGNAL(triggered()),this,SLOT(actionExitSlot()));
 //    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
@@ -225,6 +227,11 @@ void GuiMainWindow::actionFileOpen()
     {
         handleFile(sFileName);
     }
+}
+
+void GuiMainWindow::actionFileClose()
+{
+    // TODO
 }
 
 void GuiMainWindow::actionFileAttach()

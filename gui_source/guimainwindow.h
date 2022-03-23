@@ -41,6 +41,7 @@ class GuiMainWindow : public QMainWindow
     enum MENUACTION
     {
         MA_FILE_OPEN,
+        MA_FILE_CLOSE,
         __MA_SIZE,
     };
 
@@ -54,6 +55,7 @@ private slots:
     void handleFile(QString sFileName);
     void adjustWindow();
     void actionFileOpen();
+    void actionFileClose();
     void actionFileAttach();
     void actionFileDetach();
     void actionFileExit();
