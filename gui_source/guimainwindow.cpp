@@ -40,6 +40,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     g_xOptions.addID(XOptions::ID_VIEW_SHOWLOGO,true);
     g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
     g_xOptions.addID(XOptions::ID_FILE_SAVEBACKUP,true);
+    g_xOptions.addID(XOptions::ID_FILE_SAVERECENTFILES,true);
 
 #ifdef Q_OS_WIN
     g_xOptions.addID(XOptions::ID_FILE_CONTEXT,"*");
@@ -61,6 +62,10 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 
     ui->widgetDebugger->setGlobal(&g_xShortcuts,&g_xOptions);
 
+    connect(&g_xOptions,SIGNAL(openFile(QString)),this,SLOT(handleFile(QString)));
+
+    createMenus();
+
     adjustWindow();
 
     setShortcuts();
@@ -81,47 +86,91 @@ GuiMainWindow::~GuiMainWindow()
 
 void GuiMainWindow::setShortcuts()
 {
-    ui->actionFileOpen->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_OPEN));
-    ui->actionFileAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
-    ui->actionFileDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
-    ui->actionFileExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
+    menuAction[MA_FILE_OPEN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_OPEN));
+//    ui->actionFileAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
+//    ui->actionFileDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
+//    ui->actionFileExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
 
-    ui->actionViewCPU->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
-    ui->actionViewActions->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_ACTIONS));
-    ui->actionViewLog->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_LOG));
-    ui->actionViewBreakpoint->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_BREAKPOINTS));
-    ui->actionViewMemoryMap->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_MEMORYMAP));
-    ui->actionViewCallStack->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
-    ui->actionViewThreads->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_THREADS));
-    ui->actionViewHandles->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_HANDLES));
+//    ui->actionViewCPU->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
+//    ui->actionViewActions->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_ACTIONS));
+//    ui->actionViewLog->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_LOG));
+//    ui->actionViewBreakpoint->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_BREAKPOINTS));
+//    ui->actionViewMemoryMap->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_MEMORYMAP));
+//    ui->actionViewCallStack->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
+//    ui->actionViewThreads->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_THREADS));
+//    ui->actionViewHandles->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_HANDLES));
 
-    ui->actionDebugRun->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
-    ui->actionDebugStepInto->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
-    ui->actionDebugStepOver->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
+//    ui->actionDebugRun->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
+//    ui->actionDebugStepInto->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
+//    ui->actionDebugStepOver->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
 }
 
-void GuiMainWindow::on_actionFileExit_triggered()
+void GuiMainWindow::createMenus()
+{
+    QMenu *pMenuFile=new QMenu(tr("File"),ui->menubar);
+    QMenu *pMenuView=new QMenu(tr("View"),ui->menubar);
+    QMenu *pMenuDebug=new QMenu(tr("Debug"),ui->menubar);
+    QMenu *pMenuTracing=new QMenu(tr("Tracing"),ui->menubar);
+    QMenu *pMenuTools=new QMenu(tr("Tools"),ui->menubar);
+    QMenu *pMenuHelp=new QMenu(tr("Help"),ui->menubar);
+
+    ui->menubar->addAction(pMenuFile->menuAction());
+    ui->menubar->addAction(pMenuView->menuAction());
+    ui->menubar->addAction(pMenuDebug->menuAction());
+    ui->menubar->addAction(pMenuTracing->menuAction());
+    ui->menubar->addAction(pMenuTools->menuAction());
+    ui->menubar->addAction(pMenuHelp->menuAction());
+
+//    QAction *pActionOpen=new QAction(tr("Open"),this);
+    menuAction[MA_FILE_OPEN]=new QAction(tr("Open"),this);
+//    QAction *pActionClose=new QAction(tr("Close"),this);
+//    QAction *pActionExit=new QAction(tr("Exit"),this);
+//    QAction *pActionOptions=new QAction(tr("Options"),this);
+//    QAction *pActionAbout=new QAction(tr("About"),this);
+//    QAction *pActionShortcuts=new QAction(tr("Shortcuts"),this);
+//    QAction *pActionDemangle=new QAction(tr("Demangle"),this);
+
+    pMenuFile->addAction(menuAction[MA_FILE_OPEN]);
+    pMenuFile->addMenu(g_xOptions.createRecentFilesMenu(this));
+//    pMenuFile->addAction(pActionClose);
+//    pMenuFile->addAction(pActionExit);
+//    pMenuTools->addAction(pActionDemangle);
+//    pMenuTools->addAction(pActionShortcuts);
+//    pMenuTools->addAction(pActionOptions);
+//    pMenuHelp->addAction(pActionAbout);
+
+    connect(menuAction[MA_FILE_OPEN],SIGNAL(triggered()),this,SLOT(actionFileOpen()));
+//    connect(pActionClose,SIGNAL(triggered()),this,SLOT(actionCloseSlot()));
+//    connect(pActionExit,SIGNAL(triggered()),this,SLOT(actionExitSlot()));
+//    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
+//    connect(pActionAbout,SIGNAL(triggered()),this,SLOT(actionAboutSlot()));
+//    connect(pActionShortcuts,SIGNAL(triggered()),this,SLOT(actionShortcutsSlot()));
+//    connect(pActionDemangle,SIGNAL(triggered()),this,SLOT(actionDemangleSlot()));
+    // TODO
+}
+
+void GuiMainWindow::actionFileExit()
 {
     // TODO
     this->close();
 }
 
-void GuiMainWindow::on_actionDebugRun_triggered()
+void GuiMainWindow::actionDebugRun()
 {
     ui->widgetDebugger->debugRun();
 }
 
-void GuiMainWindow::on_actionDebugStepInto_triggered()
+void GuiMainWindow::actionDebugStepInto()
 {
     ui->widgetDebugger->debugStepInto();
 }
 
-void GuiMainWindow::on_actionDebugStepOver_triggered()
+void GuiMainWindow::actionDebugStepOver()
 {
     ui->widgetDebugger->debugStepOver();
 }
 
-void GuiMainWindow::on_actionToolsOptions_triggered()
+void GuiMainWindow::actionToolsOptions()
 {
     DialogOptions dialogOptions(this,&g_xOptions);
 
@@ -130,7 +179,7 @@ void GuiMainWindow::on_actionToolsOptions_triggered()
     adjustWindow();
 }
 
-void GuiMainWindow::on_actionToolsShortcuts_triggered()
+void GuiMainWindow::actionToolsShortcuts()
 {
     DialogShortcuts dialogShortcuts(this);
 
@@ -141,7 +190,7 @@ void GuiMainWindow::on_actionToolsShortcuts_triggered()
     setShortcuts();
 }
 
-void GuiMainWindow::on_actionHelpAbout_triggered()
+void GuiMainWindow::actionHelpAbout()
 {
     // TODO
 }
@@ -153,9 +202,10 @@ void GuiMainWindow::handleFile(QString sFileName)
     if(fi.isFile())
     {
         // TODO Check
-        ui->widgetDebugger->loadFile(sFileName);
-
-        g_xOptions.setLastDirectory(sFileName);
+        if(ui->widgetDebugger->loadFile(sFileName))
+        {
+            g_xOptions.setLastFileName(sFileName);
+        }
     }
 }
 
@@ -165,7 +215,7 @@ void GuiMainWindow::adjustWindow()
     ui->widgetDebugger->adjustView();
 }
 
-void GuiMainWindow::on_actionFileOpen_triggered()
+void GuiMainWindow::actionFileOpen()
 {
     QString sDirectory=g_xOptions.getLastDirectory();
 
@@ -177,12 +227,12 @@ void GuiMainWindow::on_actionFileOpen_triggered()
     }
 }
 
-void GuiMainWindow::on_actionFileAttach_triggered()
+void GuiMainWindow::actionFileAttach()
 {
     // TODO
 }
 
-void GuiMainWindow::on_actionFileDetach_triggered()
+void GuiMainWindow::actionFileDetach()
 {
     // TODO
 }
@@ -216,42 +266,42 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent)
     }
 }
 
-void GuiMainWindow::on_actionViewCPU_triggered()
+void GuiMainWindow::actionViewCPU()
 {
     ui->widgetDebugger->viewCPU();
 }
 
-void GuiMainWindow::on_actionViewActions_triggered()
+void GuiMainWindow::actionViewActions()
 {
     ui->widgetDebugger->viewActions();
 }
 
-void GuiMainWindow::on_actionViewLog_triggered()
+void GuiMainWindow::actionViewLog()
 {
     ui->widgetDebugger->viewLog();
 }
 
-void GuiMainWindow::on_actionViewBreakpoint_triggered()
+void GuiMainWindow::actionViewBreakpoint()
 {
     ui->widgetDebugger->viewBreakpoints();
 }
 
-void GuiMainWindow::on_actionViewMemoryMap_triggered()
+void GuiMainWindow::actionViewMemoryMap()
 {
     ui->widgetDebugger->viewMemoryMap();
 }
 
-void GuiMainWindow::on_actionViewCallStack_triggered()
+void GuiMainWindow::actionViewCallStack()
 {
     ui->widgetDebugger->viewCallstack();
 }
 
-void GuiMainWindow::on_actionViewThreads_triggered()
+void GuiMainWindow::actionViewThreads()
 {
     ui->widgetDebugger->viewThreads();
 }
 
-void GuiMainWindow::on_actionViewHandles_triggered()
+void GuiMainWindow::actionViewHandles()
 {
     ui->widgetDebugger->viewHandles();
 }

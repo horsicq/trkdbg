@@ -38,32 +38,39 @@ class GuiMainWindow : public QMainWindow
 {
     Q_OBJECT
 
+    enum MENUACTION
+    {
+        MA_FILE_OPEN,
+        __MA_SIZE,
+    };
+
 public:
     GuiMainWindow(QWidget *pParent=nullptr);
     ~GuiMainWindow();
     void setShortcuts();
 
 private slots:
+    void createMenus();
     void handleFile(QString sFileName);
     void adjustWindow();
-    void on_actionFileOpen_triggered();
-    void on_actionFileAttach_triggered();
-    void on_actionFileDetach_triggered();
-    void on_actionFileExit_triggered();
-    void on_actionDebugRun_triggered();
-    void on_actionDebugStepInto_triggered();
-    void on_actionDebugStepOver_triggered();
-    void on_actionToolsOptions_triggered();
-    void on_actionToolsShortcuts_triggered();
-    void on_actionHelpAbout_triggered();
-    void on_actionViewCPU_triggered();
-    void on_actionViewActions_triggered();
-    void on_actionViewLog_triggered();
-    void on_actionViewBreakpoint_triggered();
-    void on_actionViewMemoryMap_triggered();
-    void on_actionViewCallStack_triggered();
-    void on_actionViewThreads_triggered();
-    void on_actionViewHandles_triggered();
+    void actionFileOpen();
+    void actionFileAttach();
+    void actionFileDetach();
+    void actionFileExit();
+    void actionDebugRun();
+    void actionDebugStepInto();
+    void actionDebugStepOver();
+    void actionToolsOptions();
+    void actionToolsShortcuts();
+    void actionHelpAbout();
+    void actionViewCPU();
+    void actionViewActions();
+    void actionViewLog();
+    void actionViewBreakpoint();
+    void actionViewMemoryMap();
+    void actionViewCallStack();
+    void actionViewThreads();
+    void actionViewHandles();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
@@ -74,5 +81,6 @@ private:
     Ui::GuiMainWindow *ui;
     XOptions g_xOptions;
     XShortcuts g_xShortcuts;
+    QAction *menuAction[__MA_SIZE];
 };
 #endif // GUIMAINWINDOW_H
