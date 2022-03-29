@@ -130,3 +130,6 @@
 [submodule "XMemoryMapWidget"]
 	path = XMemoryMapWidget
 	url = https://github.com/horsicq/XMemoryMapWidget
+[submodule "XWinIODriver"]
+	path = XWinIODriver
+	url = https://github.com/horsicq/XWinIODriver
