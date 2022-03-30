@@ -88,9 +88,10 @@ void GuiMainWindow::setShortcuts()
 {
     menuAction[MA_FILE_OPEN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_OPEN));
     menuAction[MA_FILE_CLOSE]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_CLOSE));
-//    ui->actionFileAttach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
-//    ui->actionFileDetach->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
-//    ui->actionFileExit->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
+    menuAction[MA_FILE_ATTACH]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
+    menuAction[MA_FILE_DETACH]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
+    menuAction[MA_FILE_EXIT]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
+    menuAction[MA_VIEW_CPU]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
 
 //    ui->actionViewCPU->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
 //    ui->actionViewActions->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_ACTIONS));
@@ -124,7 +125,11 @@ void GuiMainWindow::createMenus()
 
     menuAction[MA_FILE_OPEN]=new QAction(tr("Open"),this);
     menuAction[MA_FILE_CLOSE]=new QAction(tr("Close"),this);
-//    QAction *pActionExit=new QAction(tr("Exit"),this);
+    menuAction[MA_FILE_ATTACH]=new QAction(tr("Attach"),this);
+    menuAction[MA_FILE_DETACH]=new QAction(tr("Detach"),this);
+    menuAction[MA_FILE_EXIT]=new QAction(tr("Exit"),this);
+    menuAction[MA_VIEW_CPU]=new QAction(tr("CPU"),this);
+
 //    QAction *pActionOptions=new QAction(tr("Options"),this);
 //    QAction *pActionAbout=new QAction(tr("About"),this);
 //    QAction *pActionShortcuts=new QAction(tr("Shortcuts"),this);
@@ -133,8 +138,10 @@ void GuiMainWindow::createMenus()
     pMenuFile->addAction(menuAction[MA_FILE_OPEN]);
     pMenuFile->addMenu(g_xOptions.createRecentFilesMenu(this));
     pMenuFile->addAction(menuAction[MA_FILE_CLOSE]);
-//    pMenuFile->addAction(pActionClose);
-//    pMenuFile->addAction(pActionExit);
+    pMenuFile->addAction(menuAction[MA_FILE_ATTACH]);
+    pMenuFile->addAction(menuAction[MA_FILE_DETACH]);
+    pMenuFile->addAction(menuAction[MA_FILE_EXIT]);
+    pMenuView->addAction(menuAction[MA_VIEW_CPU]);
 //    pMenuTools->addAction(pActionDemangle);
 //    pMenuTools->addAction(pActionShortcuts);
 //    pMenuTools->addAction(pActionOptions);
@@ -142,8 +149,10 @@ void GuiMainWindow::createMenus()
 
     connect(menuAction[MA_FILE_OPEN],SIGNAL(triggered()),this,SLOT(actionFileOpen()));
     connect(menuAction[MA_FILE_CLOSE],SIGNAL(triggered()),this,SLOT(actionFileClose()));
-//    connect(pActionClose,SIGNAL(triggered()),this,SLOT(actionCloseSlot()));
-//    connect(pActionExit,SIGNAL(triggered()),this,SLOT(actionExitSlot()));
+    connect(menuAction[MA_FILE_ATTACH],SIGNAL(triggered()),this,SLOT(actionFileAttach()));
+    connect(menuAction[MA_FILE_DETACH],SIGNAL(triggered()),this,SLOT(actionFileDetach()));
+    connect(menuAction[MA_FILE_EXIT],SIGNAL(triggered()),this,SLOT(actionFileExit()));
+    connect(menuAction[MA_VIEW_CPU],SIGNAL(triggered()),this,SLOT(actionViewCPU()));
 //    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
 //    connect(pActionAbout,SIGNAL(triggered()),this,SLOT(actionAboutSlot()));
 //    connect(pActionShortcuts,SIGNAL(triggered()),this,SLOT(actionShortcutsSlot()));

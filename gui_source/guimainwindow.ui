@@ -38,18 +38,9 @@
      <x>0</x>
      <y>0</y>
      <width>916</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionFileOpen"/>
-    <addaction name="actionFileAttach"/>
-    <addaction name="actionFileDetach"/>
-    <addaction name="actionFileExit"/>
-   </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Tools</string>
@@ -89,7 +80,6 @@
      <string>Tracing</string>
     </property>
    </widget>
-   <addaction name="menuFile"/>
    <addaction name="menuView"/>
    <addaction name="menuDebug"/>
    <addaction name="menuTracing"/>

@@ -42,6 +42,10 @@ class GuiMainWindow : public QMainWindow
     {
         MA_FILE_OPEN,
         MA_FILE_CLOSE,
+        MA_FILE_ATTACH,
+        MA_FILE_DETACH,
+        MA_FILE_EXIT,
+        MA_VIEW_CPU,
         __MA_SIZE,
     };
 
