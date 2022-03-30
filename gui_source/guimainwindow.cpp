@@ -287,11 +287,6 @@ void GuiMainWindow::actionViewCPU()
     ui->widgetDebugger->viewCPU();
 }
 
-void GuiMainWindow::actionViewActions()
-{
-    ui->widgetDebugger->viewActions();
-}
-
 void GuiMainWindow::actionViewLog()
 {
     ui->widgetDebugger->viewLog();

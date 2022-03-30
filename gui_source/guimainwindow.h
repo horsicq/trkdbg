@@ -70,7 +70,6 @@ private slots:
     void actionToolsShortcuts();
     void actionHelpAbout();
     void actionViewCPU();
-    void actionViewActions();
     void actionViewLog();
     void actionViewBreakpoint();
     void actionViewMemoryMap();
