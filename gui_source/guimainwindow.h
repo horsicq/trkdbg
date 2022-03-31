@@ -46,6 +46,7 @@ class GuiMainWindow : public QMainWindow
         MA_FILE_DETACH,
         MA_FILE_EXIT,
         MA_VIEW_CPU,
+        MA_VIEW_LOG,
         __MA_SIZE,
     };
 

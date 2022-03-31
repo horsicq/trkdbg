@@ -92,10 +92,8 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_FILE_DETACH]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
     menuAction[MA_FILE_EXIT]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
     menuAction[MA_VIEW_CPU]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
+    menuAction[MA_VIEW_LOG]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_LOG));
 
-//    ui->actionViewCPU->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
-//    ui->actionViewActions->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_ACTIONS));
-//    ui->actionViewLog->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_LOG));
 //    ui->actionViewBreakpoint->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_BREAKPOINTS));
 //    ui->actionViewMemoryMap->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_MEMORYMAP));
 //    ui->actionViewCallStack->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
@@ -129,6 +127,7 @@ void GuiMainWindow::createMenus()
     menuAction[MA_FILE_DETACH]=new QAction(tr("Detach"),this);
     menuAction[MA_FILE_EXIT]=new QAction(tr("Exit"),this);
     menuAction[MA_VIEW_CPU]=new QAction(tr("CPU"),this);
+    menuAction[MA_VIEW_LOG]=new QAction(tr("Log"),this);
 
 //    QAction *pActionOptions=new QAction(tr("Options"),this);
 //    QAction *pActionAbout=new QAction(tr("About"),this);
@@ -142,6 +141,7 @@ void GuiMainWindow::createMenus()
     pMenuFile->addAction(menuAction[MA_FILE_DETACH]);
     pMenuFile->addAction(menuAction[MA_FILE_EXIT]);
     pMenuView->addAction(menuAction[MA_VIEW_CPU]);
+    pMenuView->addAction(menuAction[MA_VIEW_LOG]);
 //    pMenuTools->addAction(pActionDemangle);
 //    pMenuTools->addAction(pActionShortcuts);
 //    pMenuTools->addAction(pActionOptions);
@@ -153,6 +153,7 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_FILE_DETACH],SIGNAL(triggered()),this,SLOT(actionFileDetach()));
     connect(menuAction[MA_FILE_EXIT],SIGNAL(triggered()),this,SLOT(actionFileExit()));
     connect(menuAction[MA_VIEW_CPU],SIGNAL(triggered()),this,SLOT(actionViewCPU()));
+    connect(menuAction[MA_VIEW_LOG],SIGNAL(triggered()),this,SLOT(actionViewLog()));
 //    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
 //    connect(pActionAbout,SIGNAL(triggered()),this,SLOT(actionAboutSlot()));
 //    connect(pActionShortcuts,SIGNAL(triggered()),this,SLOT(actionShortcutsSlot()));
