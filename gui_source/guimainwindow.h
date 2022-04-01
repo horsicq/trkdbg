@@ -47,6 +47,11 @@ class GuiMainWindow : public QMainWindow
         MA_FILE_EXIT,
         MA_VIEW_CPU,
         MA_VIEW_LOG,
+        MA_VIEW_BREAKPOINTS,
+        MA_VIEW_MEMORYMAP,
+        MA_VIEW_CALLSTACK,
+        MA_VIEW_THREADS,
+        MA_VIEW_HANDLES,
         __MA_SIZE,
     };
 

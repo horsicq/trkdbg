@@ -93,12 +93,11 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_FILE_EXIT]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
     menuAction[MA_VIEW_CPU]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
     menuAction[MA_VIEW_LOG]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_LOG));
-
-//    ui->actionViewBreakpoint->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_BREAKPOINTS));
-//    ui->actionViewMemoryMap->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_MEMORYMAP));
-//    ui->actionViewCallStack->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
-//    ui->actionViewThreads->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_THREADS));
-//    ui->actionViewHandles->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_HANDLES));
+    menuAction[MA_VIEW_BREAKPOINTS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_BREAKPOINTS));
+    menuAction[MA_VIEW_MEMORYMAP]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_MEMORYMAP));
+    menuAction[MA_VIEW_CALLSTACK]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
+    menuAction[MA_VIEW_THREADS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_THREADS));
+    menuAction[MA_VIEW_HANDLES]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_HANDLES));
 
 //    ui->actionDebugRun->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
 //    ui->actionDebugStepInto->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
@@ -128,6 +127,11 @@ void GuiMainWindow::createMenus()
     menuAction[MA_FILE_EXIT]=new QAction(tr("Exit"),this);
     menuAction[MA_VIEW_CPU]=new QAction(tr("CPU"),this);
     menuAction[MA_VIEW_LOG]=new QAction(tr("Log"),this);
+    menuAction[MA_VIEW_BREAKPOINTS]=new QAction(tr("Breakpoints"),this);
+    menuAction[MA_VIEW_MEMORYMAP]=new QAction(tr("Memory map"),this);
+    menuAction[MA_VIEW_CALLSTACK]=new QAction(tr("Callstacks"),this);
+    menuAction[MA_VIEW_THREADS]=new QAction(tr("Threads"),this);
+    menuAction[MA_VIEW_HANDLES]=new QAction(tr("Handles"),this);
 
 //    QAction *pActionOptions=new QAction(tr("Options"),this);
 //    QAction *pActionAbout=new QAction(tr("About"),this);
@@ -142,6 +146,11 @@ void GuiMainWindow::createMenus()
     pMenuFile->addAction(menuAction[MA_FILE_EXIT]);
     pMenuView->addAction(menuAction[MA_VIEW_CPU]);
     pMenuView->addAction(menuAction[MA_VIEW_LOG]);
+    pMenuView->addAction(menuAction[MA_VIEW_BREAKPOINTS]);
+    pMenuView->addAction(menuAction[MA_VIEW_MEMORYMAP]);
+    pMenuView->addAction(menuAction[MA_VIEW_CALLSTACK]);
+    pMenuView->addAction(menuAction[MA_VIEW_THREADS]);
+    pMenuView->addAction(menuAction[MA_VIEW_HANDLES]);
 //    pMenuTools->addAction(pActionDemangle);
 //    pMenuTools->addAction(pActionShortcuts);
 //    pMenuTools->addAction(pActionOptions);
@@ -154,6 +163,11 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_FILE_EXIT],SIGNAL(triggered()),this,SLOT(actionFileExit()));
     connect(menuAction[MA_VIEW_CPU],SIGNAL(triggered()),this,SLOT(actionViewCPU()));
     connect(menuAction[MA_VIEW_LOG],SIGNAL(triggered()),this,SLOT(actionViewLog()));
+    connect(menuAction[MA_VIEW_BREAKPOINTS],SIGNAL(triggered()),this,SLOT(actionViewBreakpoint()));
+    connect(menuAction[MA_VIEW_MEMORYMAP],SIGNAL(triggered()),this,SLOT(actionViewMemoryMap()));
+    connect(menuAction[MA_VIEW_CALLSTACK],SIGNAL(triggered()),this,SLOT(actionViewCallStack()));
+    connect(menuAction[MA_VIEW_THREADS],SIGNAL(triggered()),this,SLOT(actionViewThreads()));
+    connect(menuAction[MA_VIEW_HANDLES],SIGNAL(triggered()),this,SLOT(actionViewHandles()));
 //    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
 //    connect(pActionAbout,SIGNAL(triggered()),this,SLOT(actionAboutSlot()));
 //    connect(pActionShortcuts,SIGNAL(triggered()),this,SLOT(actionShortcutsSlot()));
