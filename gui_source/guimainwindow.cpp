@@ -98,10 +98,9 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_VIEW_CALLSTACK]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
     menuAction[MA_VIEW_THREADS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_THREADS));
     menuAction[MA_VIEW_HANDLES]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_HANDLES));
-
-//    ui->actionDebugRun->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
-//    ui->actionDebugStepInto->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
-//    ui->actionDebugStepOver->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
+    menuAction[MA_DEBUG_RUN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
+    menuAction[MA_DEBUG_STEPINTO]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
+    menuAction[MA_DEBUG_STEPOVER]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
 }
 
 void GuiMainWindow::createMenus()
@@ -132,6 +131,9 @@ void GuiMainWindow::createMenus()
     menuAction[MA_VIEW_CALLSTACK]=new QAction(tr("Callstacks"),this);
     menuAction[MA_VIEW_THREADS]=new QAction(tr("Threads"),this);
     menuAction[MA_VIEW_HANDLES]=new QAction(tr("Handles"),this);
+    menuAction[MA_DEBUG_RUN]=new QAction(tr("Run"),this);
+    menuAction[MA_DEBUG_STEPINTO]=new QAction(tr("Step into"),this);
+    menuAction[MA_DEBUG_STEPOVER]=new QAction(tr("Step over"),this);
 
 //    QAction *pActionOptions=new QAction(tr("Options"),this);
 //    QAction *pActionAbout=new QAction(tr("About"),this);
@@ -151,6 +153,9 @@ void GuiMainWindow::createMenus()
     pMenuView->addAction(menuAction[MA_VIEW_CALLSTACK]);
     pMenuView->addAction(menuAction[MA_VIEW_THREADS]);
     pMenuView->addAction(menuAction[MA_VIEW_HANDLES]);
+    pMenuDebug->addAction(menuAction[MA_DEBUG_RUN]);
+    pMenuDebug->addAction(menuAction[MA_DEBUG_STEPINTO]);
+    pMenuDebug->addAction(menuAction[MA_DEBUG_STEPOVER]);
 //    pMenuTools->addAction(pActionDemangle);
 //    pMenuTools->addAction(pActionShortcuts);
 //    pMenuTools->addAction(pActionOptions);
@@ -168,6 +173,9 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_VIEW_CALLSTACK],SIGNAL(triggered()),this,SLOT(actionViewCallStack()));
     connect(menuAction[MA_VIEW_THREADS],SIGNAL(triggered()),this,SLOT(actionViewThreads()));
     connect(menuAction[MA_VIEW_HANDLES],SIGNAL(triggered()),this,SLOT(actionViewHandles()));
+    connect(menuAction[MA_DEBUG_RUN],SIGNAL(triggered()),this,SLOT(actionDebugRun()));
+    connect(menuAction[MA_DEBUG_STEPINTO],SIGNAL(triggered()),this,SLOT(actionDebugStepInto()));
+    connect(menuAction[MA_DEBUG_STEPOVER],SIGNAL(triggered()),this,SLOT(actionDebugStepOver()));
 //    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
 //    connect(pActionAbout,SIGNAL(triggered()),this,SLOT(actionAboutSlot()));
 //    connect(pActionShortcuts,SIGNAL(triggered()),this,SLOT(actionShortcutsSlot()));

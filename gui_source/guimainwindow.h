@@ -22,13 +22,13 @@
 #define GUIMAINWINDOW_H
 
 #include "../global.h"
-#include <QMainWindow>
-#include <QFileDialog>
 #include <QDragEnterEvent>
+#include <QFileDialog>
+#include <QMainWindow>
 #include <QMimeData>
-#include "xoptions.h"
-#include "dialogshortcuts.h"
 #include "dialogoptions.h"
+#include "dialogshortcuts.h"
+#include "xoptions.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class GuiMainWindow; }
@@ -52,12 +52,16 @@ class GuiMainWindow : public QMainWindow
         MA_VIEW_CALLSTACK,
         MA_VIEW_THREADS,
         MA_VIEW_HANDLES,
+        MA_DEBUG_RUN,
+        MA_DEBUG_STEPINTO,
+        MA_DEBUG_STEPOVER,
         __MA_SIZE,
     };
 
 public:
     GuiMainWindow(QWidget *pParent=nullptr);
     ~GuiMainWindow();
+
     void setShortcuts();
 
 private slots:
