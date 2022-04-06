@@ -41,66 +41,11 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuTools">
-    <property name="title">
-     <string>Tools</string>
-    </property>
-    <addaction name="actionToolsOptions"/>
-    <addaction name="actionToolsShortcuts"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionHelpAbout"/>
-   </widget>
-   <widget class="QMenu" name="menuDebug">
-    <property name="title">
-     <string>Debug</string>
-    </property>
-    <addaction name="actionDebugRun"/>
-    <addaction name="actionDebugStepInto"/>
-    <addaction name="actionDebugStepOver"/>
-   </widget>
-   <widget class="QMenu" name="menuTracing">
-    <property name="title">
-     <string>Tracing</string>
-    </property>
-   </widget>
-   <addaction name="menuDebug"/>
-   <addaction name="menuTracing"/>
-   <addaction name="menuTools"/>
-   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionToolsOptions">
-   <property name="text">
-    <string>Options</string>
-   </property>
-  </action>
-  <action name="actionToolsShortcuts">
-   <property name="text">
-    <string>Shortcuts</string>
-   </property>
-  </action>
   <action name="actionHelpAbout">
    <property name="text">
     <string>About</string>
-   </property>
-  </action>
-  <action name="actionDebugRun">
-   <property name="text">
-    <string>Run</string>
-   </property>
-  </action>
-  <action name="actionDebugStepInto">
-   <property name="text">
-    <string>Step into</string>
-   </property>
-  </action>
-  <action name="actionDebugStepOver">
-   <property name="text">
-    <string>Step over</string>
    </property>
   </action>
  </widget>

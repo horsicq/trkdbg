@@ -28,6 +28,7 @@
 #include <QMimeData>
 #include "dialogoptions.h"
 #include "dialogshortcuts.h"
+#include "dialogabout.h"
 #include "xoptions.h"
 
 QT_BEGIN_NAMESPACE
@@ -55,6 +56,9 @@ class GuiMainWindow : public QMainWindow
         MA_DEBUG_RUN,
         MA_DEBUG_STEPINTO,
         MA_DEBUG_STEPOVER,
+        MA_TOOLS_SHORTCUTS,
+        MA_TOOLS_OPTIONS,
+        MA_HELP_ABOUT,
         __MA_SIZE,
     };
 

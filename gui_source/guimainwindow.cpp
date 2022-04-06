@@ -101,6 +101,9 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_DEBUG_RUN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
     menuAction[MA_DEBUG_STEPINTO]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
     menuAction[MA_DEBUG_STEPOVER]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
+    menuAction[MA_TOOLS_SHORTCUTS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_TOOLS_SHORTCUTS));
+    menuAction[MA_TOOLS_OPTIONS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_TOOLS_OPTIONS));
+    menuAction[MA_HELP_ABOUT]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_HELP_ABOUT));
 }
 
 void GuiMainWindow::createMenus()
@@ -134,11 +137,11 @@ void GuiMainWindow::createMenus()
     menuAction[MA_DEBUG_RUN]=new QAction(tr("Run"),this);
     menuAction[MA_DEBUG_STEPINTO]=new QAction(tr("Step into"),this);
     menuAction[MA_DEBUG_STEPOVER]=new QAction(tr("Step over"),this);
+    menuAction[MA_TOOLS_SHORTCUTS]=new QAction(tr("Shortcuts"),this);
+    menuAction[MA_TOOLS_OPTIONS]=new QAction(tr("Options"),this);
+    menuAction[MA_HELP_ABOUT]=new QAction(tr("About"),this);
 
-//    QAction *pActionOptions=new QAction(tr("Options"),this);
 //    QAction *pActionAbout=new QAction(tr("About"),this);
-//    QAction *pActionShortcuts=new QAction(tr("Shortcuts"),this);
-//    QAction *pActionDemangle=new QAction(tr("Demangle"),this);
 
     pMenuFile->addAction(menuAction[MA_FILE_OPEN]);
     pMenuFile->addMenu(g_xOptions.createRecentFilesMenu(this));
@@ -156,10 +159,9 @@ void GuiMainWindow::createMenus()
     pMenuDebug->addAction(menuAction[MA_DEBUG_RUN]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPINTO]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPOVER]);
-//    pMenuTools->addAction(pActionDemangle);
-//    pMenuTools->addAction(pActionShortcuts);
-//    pMenuTools->addAction(pActionOptions);
-//    pMenuHelp->addAction(pActionAbout);
+    pMenuTools->addAction(menuAction[MA_TOOLS_SHORTCUTS]);
+    pMenuTools->addAction(menuAction[MA_TOOLS_OPTIONS]);
+    pMenuHelp->addAction(menuAction[MA_HELP_ABOUT]);
 
     connect(menuAction[MA_FILE_OPEN],SIGNAL(triggered()),this,SLOT(actionFileOpen()));
     connect(menuAction[MA_FILE_CLOSE],SIGNAL(triggered()),this,SLOT(actionFileClose()));
@@ -176,10 +178,9 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_DEBUG_RUN],SIGNAL(triggered()),this,SLOT(actionDebugRun()));
     connect(menuAction[MA_DEBUG_STEPINTO],SIGNAL(triggered()),this,SLOT(actionDebugStepInto()));
     connect(menuAction[MA_DEBUG_STEPOVER],SIGNAL(triggered()),this,SLOT(actionDebugStepOver()));
-//    connect(pActionOptions,SIGNAL(triggered()),this,SLOT(actionOptionsSlot()));
-//    connect(pActionAbout,SIGNAL(triggered()),this,SLOT(actionAboutSlot()));
-//    connect(pActionShortcuts,SIGNAL(triggered()),this,SLOT(actionShortcutsSlot()));
-//    connect(pActionDemangle,SIGNAL(triggered()),this,SLOT(actionDemangleSlot()));
+    connect(menuAction[MA_TOOLS_SHORTCUTS],SIGNAL(triggered()),this,SLOT(actionToolsShortcuts()));
+    connect(menuAction[MA_TOOLS_OPTIONS],SIGNAL(triggered()),this,SLOT(actionToolsOptions()));
+    connect(menuAction[MA_HELP_ABOUT],SIGNAL(triggered()),this,SLOT(actionHelpAbout()));
     // TODO
 }
 
@@ -226,7 +227,9 @@ void GuiMainWindow::actionToolsShortcuts()
 
 void GuiMainWindow::actionHelpAbout()
 {
-    // TODO
+    DialogAbout dialogAbout(this);
+
+    dialogAbout.exec();
 }
 
 void GuiMainWindow::handleFile(QString sFileName)
