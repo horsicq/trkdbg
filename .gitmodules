@@ -136,3 +136,12 @@
 [submodule "XInfoDB"]
 	path = XInfoDB
 	url = https://github.com/horsicq/XInfoDB
+[submodule "XThreadsWidget"]
+	path = XThreadsWidget
+	url = https://github.com/horsicq/XThreadsWidget
+[submodule "XHandlesWidget"]
+	path = XHandlesWidget
+	url = https://github.com/horsicq/XHandlesWidget
+[submodule "XBreakPointsWidget"]
+	path = XBreakPointsWidget
+	url = https://github.com/horsicq/XBreakPointsWidget
