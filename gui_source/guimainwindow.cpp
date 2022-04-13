@@ -140,8 +140,6 @@ void GuiMainWindow::createMenus()
     menuAction[MA_TOOLS_OPTIONS]=new QAction(tr("Options"),this);
     menuAction[MA_HELP_ABOUT]=new QAction(tr("About"),this);
 
-//    QAction *pActionAbout=new QAction(tr("About"),this);
-
     pMenuFile->addAction(menuAction[MA_FILE_OPEN]);
     pMenuFile->addMenu(g_xOptions.createRecentFilesMenu(this));
     pMenuFile->addAction(menuAction[MA_FILE_CLOSE]);
