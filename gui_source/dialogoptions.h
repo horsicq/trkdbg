@@ -31,6 +31,8 @@
 #include "searchsignaturesoptionswidget.h"
 #include "xhexviewoptionswidget.h"
 #include "xdisasmviewoptionswidget.h"
+#include "xstackviewoptionswidget.h"
+#include "xregistersviewoptionswidget.h"
 #include "xdebuggeroptionswidget.h"
 #include "../global.h"
 
@@ -56,6 +58,8 @@ private:
     SearchSignaturesOptionsWidget *g_pSearchSignaturesOptionsWidget;
     XHexViewOptionsWidget *g_pXHexViewOptionsWidget;
     XDisasmViewOptionsWidget *g_pXDisasmViewOptionsWidget;
+    XStackViewOptionsWidget *g_pXStackViewOptionsWidget;
+    XRegistersViewOptionsWidget *g_pXRegistersViewOptionsWidget;
     XDebuggerOptionsWidget *g_pXDebuggerOptionsWidget;
     XOptions *g_pOptions;
 };

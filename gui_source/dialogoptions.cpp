@@ -33,6 +33,8 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
     g_pSearchSignaturesOptionsWidget=new SearchSignaturesOptionsWidget(this);
     g_pXHexViewOptionsWidget=new XHexViewOptionsWidget(this);
     g_pXDisasmViewOptionsWidget=new XDisasmViewOptionsWidget(this);
+    g_pXStackViewOptionsWidget=new XStackViewOptionsWidget(this);
+    g_pXRegistersViewOptionsWidget=new XRegistersViewOptionsWidget(this);
     g_pXDebuggerOptionsWidget=new XDebuggerOptionsWidget(this);
 
     ui->widgetOptions->setOptions(pOptions,X_APPLICATIONDISPLAYNAME);
@@ -48,6 +50,12 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) :
 
     ui->widgetOptions->addPage(g_pXDisasmViewOptionsWidget,tr("Disasm"));
     g_pXDisasmViewOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->addPage(g_pXStackViewOptionsWidget,tr("Stack"));
+    g_pXStackViewOptionsWidget->setOptions(pOptions);
+
+    ui->widgetOptions->addPage(g_pXRegistersViewOptionsWidget,tr("Registers"));
+    g_pXRegistersViewOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->addPage(g_pXDebuggerOptionsWidget,tr("Debugger"));
     g_pXDebuggerOptionsWidget->setOptions(pOptions);
@@ -67,6 +75,8 @@ void DialogOptions::on_pushButtonOK_clicked()
     g_pSearchSignaturesOptionsWidget->save();
     g_pXHexViewOptionsWidget->save();
     g_pXDisasmViewOptionsWidget->save();
+    g_pXStackViewOptionsWidget->save();
+    g_pXRegistersViewOptionsWidget->save();
     g_pXDebuggerOptionsWidget->save();
 
     if(g_pOptions->isRestartNeeded())

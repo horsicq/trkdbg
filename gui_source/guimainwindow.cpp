@@ -37,6 +37,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     g_xOptions.addID(XOptions::ID_VIEW_QSS,"");
     g_xOptions.addID(XOptions::ID_VIEW_LANG,"System");
     g_xOptions.addID(XOptions::ID_VIEW_STAYONTOP,false);
+    g_xOptions.addID(XOptions::ID_VIEW_FONT,font().toString());
     g_xOptions.addID(XOptions::ID_FILE_SAVELASTDIRECTORY,true);
     g_xOptions.addID(XOptions::ID_FILE_SAVEBACKUP,true);
     g_xOptions.addID(XOptions::ID_FILE_SAVERECENTFILES,true);
@@ -49,6 +50,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     SearchSignaturesOptionsWidget::setDefaultValues(&g_xOptions);
     XHexViewOptionsWidget::setDefaultValues(&g_xOptions);
     XDisasmViewOptionsWidget::setDefaultValues(&g_xOptions);
+    XStackViewOptionsWidget::setDefaultValues(&g_xOptions);
+    XRegistersViewOptionsWidget::setDefaultValues(&g_xOptions);
     XDebuggerOptionsWidget::setDefaultValues(&g_xOptions);
 
     g_xOptions.load();
@@ -246,6 +249,7 @@ void GuiMainWindow::handleFile(QString sFileName)
 void GuiMainWindow::adjustWindow()
 {
     g_xOptions.adjustStayOnTop(this);
+    g_xOptions.adjustFont(this);
     ui->widgetDebugger->adjustView();
 }
 
