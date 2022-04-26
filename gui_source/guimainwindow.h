@@ -53,6 +53,8 @@ class GuiMainWindow : public QMainWindow
         MA_VIEW_CALLSTACK,
         MA_VIEW_THREADS,
         MA_VIEW_HANDLES,
+        MA_VIEW_MODULES,
+        MA_VIEW_SYMBOLS,
         MA_DEBUG_RUN,
         MA_DEBUG_STEPINTO,
         MA_DEBUG_STEPOVER,
@@ -90,6 +92,8 @@ private slots:
     void actionViewCallStack();
     void actionViewThreads();
     void actionViewHandles();
+    void actionViewModules();
+    void actionViewSymbols();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;

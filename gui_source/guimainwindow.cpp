@@ -100,6 +100,8 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_VIEW_CALLSTACK]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CALLSTACK));
     menuAction[MA_VIEW_THREADS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_THREADS));
     menuAction[MA_VIEW_HANDLES]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_HANDLES));
+    menuAction[MA_VIEW_MODULES]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_MODULES));
+    menuAction[MA_VIEW_SYMBOLS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_SYMBOLS));
     menuAction[MA_DEBUG_RUN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
     menuAction[MA_DEBUG_STEPINTO]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
     menuAction[MA_DEBUG_STEPOVER]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
@@ -136,6 +138,8 @@ void GuiMainWindow::createMenus()
     menuAction[MA_VIEW_CALLSTACK]=new QAction(tr("Callstacks"),this);
     menuAction[MA_VIEW_THREADS]=new QAction(tr("Threads"),this);
     menuAction[MA_VIEW_HANDLES]=new QAction(tr("Handles"),this);
+    menuAction[MA_VIEW_MODULES]=new QAction(tr("Modules"),this);
+    menuAction[MA_VIEW_SYMBOLS]=new QAction(tr("Symbols"),this);
     menuAction[MA_DEBUG_RUN]=new QAction(tr("Run"),this);
     menuAction[MA_DEBUG_STEPINTO]=new QAction(tr("Step into"),this);
     menuAction[MA_DEBUG_STEPOVER]=new QAction(tr("Step over"),this);
@@ -156,6 +160,8 @@ void GuiMainWindow::createMenus()
     pMenuView->addAction(menuAction[MA_VIEW_CALLSTACK]);
     pMenuView->addAction(menuAction[MA_VIEW_THREADS]);
     pMenuView->addAction(menuAction[MA_VIEW_HANDLES]);
+    pMenuView->addAction(menuAction[MA_VIEW_MODULES]);
+    pMenuView->addAction(menuAction[MA_VIEW_SYMBOLS]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_RUN]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPINTO]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPOVER]);
@@ -175,6 +181,8 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_VIEW_CALLSTACK],SIGNAL(triggered()),this,SLOT(actionViewCallStack()));
     connect(menuAction[MA_VIEW_THREADS],SIGNAL(triggered()),this,SLOT(actionViewThreads()));
     connect(menuAction[MA_VIEW_HANDLES],SIGNAL(triggered()),this,SLOT(actionViewHandles()));
+    connect(menuAction[MA_VIEW_MODULES],SIGNAL(triggered()),this,SLOT(actionViewModules()));
+    connect(menuAction[MA_VIEW_SYMBOLS],SIGNAL(triggered()),this,SLOT(actionViewSymbols()));
     connect(menuAction[MA_DEBUG_RUN],SIGNAL(triggered()),this,SLOT(actionDebugRun()));
     connect(menuAction[MA_DEBUG_STEPINTO],SIGNAL(triggered()),this,SLOT(actionDebugStepInto()));
     connect(menuAction[MA_DEBUG_STEPOVER],SIGNAL(triggered()),this,SLOT(actionDebugStepOver()));
@@ -342,4 +350,14 @@ void GuiMainWindow::actionViewThreads()
 void GuiMainWindow::actionViewHandles()
 {
     ui->widgetDebugger->viewHandles();
+}
+
+void GuiMainWindow::actionViewModules()
+{
+    ui->widgetDebugger->viewModules();
+}
+
+void GuiMainWindow::actionViewSymbols()
+{
+    ui->widgetDebugger->viewSymbols();
 }
