@@ -67,27 +67,3 @@ DialogOptions::~DialogOptions()
 {
     delete ui;
 }
-
-void DialogOptions::on_pushButtonOK_clicked()
-{
-    ui->widgetOptions->save();
-//    g_pStaticScanOptionsWidget->save();
-    g_pSearchSignaturesOptionsWidget->save();
-    g_pXHexViewOptionsWidget->save();
-    g_pXDisasmViewOptionsWidget->save();
-    g_pXStackViewOptionsWidget->save();
-    g_pXRegistersViewOptionsWidget->save();
-    g_pXDebuggerOptionsWidget->save();
-
-    if(g_pOptions->isRestartNeeded())
-    {
-        QMessageBox::information(this,tr("Information"),tr("Please restart the application"));
-    }
-
-    this->close();
-}
-
-void DialogOptions::on_pushButtonCancel_clicked()
-{
-    this->close();
-}
