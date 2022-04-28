@@ -145,3 +145,6 @@
 [submodule "XBreakPointsWidget"]
 	path = XBreakPointsWidget
 	url = https://github.com/horsicq/XBreakPointsWidget
+[submodule "XSymbolsWidget"]
+	path = XSymbolsWidget
+	url = https://github.com/horsicq/XSymbolsWidget
