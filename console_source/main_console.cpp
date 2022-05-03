@@ -63,18 +63,22 @@ int main(int argc, char *argv[])
 
     if(listArgs.count())
     {
+        XInfoDB xInfoDB;
     #ifdef Q_OS_WIN
-        XWindowsDebugger debugger;
+        XWindowsDebugger debugger(0,&xInfoDB);
     #endif
     #ifdef Q_OS_LINUX
-        XLinuxDebugger debugger;
+        XLinuxDebugger debugger(0,&xInfoDB);
+    #endif
+    #ifdef Q_OS_OSX
+        XOSXDebugger debugger(0,&xInfoDB);
     #endif
 
         XAbstractDebugger::OPTIONS options={};
 
         options.bShowConsole=parser.isSet(clShowConsole);
         options.sFileName=listArgs.at(0);
-        options.bBreakpointOnTargetEntryPoint=true;
+        options.bBreakpointOnProgramEntryPoint=true;
 
         debugger.setOptions(options);
 

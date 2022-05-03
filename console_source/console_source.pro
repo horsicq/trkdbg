@@ -12,6 +12,8 @@ CONFIG -= app_bundle
 SOURCES += \
         main_console.cpp
 
+DEFINES += USE_XPROCESS
+
 !contains(XCONFIG, xoptions) {
     XCONFIG += xoptions
     include(../XOptions/xoptions.pri)
