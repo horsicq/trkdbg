@@ -59,7 +59,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
     g_xShortcuts.setName(X_SHORTCUTSFILE);
     g_xShortcuts.setNative(g_xOptions.isNative());
 
-    g_xShortcuts.addGroup(XShortcuts::ID_DEBUGGER);
+    g_xShortcuts.addGroup(XShortcuts::GROUPID_DEBUGGER);
     g_xShortcuts.load();
 
     ui->widgetDebugger->setGlobal(&g_xShortcuts,&g_xOptions);
@@ -88,11 +88,11 @@ GuiMainWindow::~GuiMainWindow()
 
 void GuiMainWindow::setShortcuts()
 {
-    menuAction[MA_FILE_OPEN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_OPEN));
-    menuAction[MA_FILE_CLOSE]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_CLOSE));
-    menuAction[MA_FILE_ATTACH]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_ATTACH));
-    menuAction[MA_FILE_DETACH]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_DETACH));
-    menuAction[MA_FILE_EXIT]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_FILE_EXIT));
+    menuAction[MA_FILE_OPEN]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_OPEN));
+    menuAction[MA_FILE_CLOSE]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_CLOSE));
+    menuAction[MA_FILE_ATTACH]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_ATTACH));
+    menuAction[MA_FILE_DETACH]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_DETACH));
+    menuAction[MA_FILE_EXIT]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_EXIT));
     menuAction[MA_VIEW_CPU]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_CPU));
     menuAction[MA_VIEW_LOG]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_LOG));
     menuAction[MA_VIEW_BREAKPOINTS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_VIEW_BREAKPOINTS));
