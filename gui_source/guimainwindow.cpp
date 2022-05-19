@@ -105,9 +105,9 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_DEBUG_RUN]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_RUN));
     menuAction[MA_DEBUG_STEPINTO]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPINTO));
     menuAction[MA_DEBUG_STEPOVER]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_DEBUG_STEPOVER));
-    menuAction[MA_TOOLS_SHORTCUTS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_TOOLS_SHORTCUTS));
-    menuAction[MA_TOOLS_OPTIONS]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_TOOLS_OPTIONS));
-    menuAction[MA_HELP_ABOUT]->setShortcut(g_xShortcuts.getShortcut(XShortcuts::ID_DEBUGGER_HELP_ABOUT));
+    menuAction[MA_TOOLS_SHORTCUTS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TOOLS_SHORTCUTS));
+    menuAction[MA_TOOLS_OPTIONS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TOOLS_OPTIONS));
+    menuAction[MA_HELP_ABOUT]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_HELP_ABOUT));
 }
 
 void GuiMainWindow::createMenus()
