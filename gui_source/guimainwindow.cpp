@@ -103,6 +103,7 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_VIEW_MODULES]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_VIEW_MODULES));
     menuAction[MA_VIEW_SYMBOLS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_VIEW_SYMBOLS));
     menuAction[MA_DEBUG_RUN]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_RUN));
+    menuAction[MA_DEBUG_STOP]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_STOP));
     menuAction[MA_DEBUG_STEPINTO]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_STEPINTO));
     menuAction[MA_DEBUG_STEPOVER]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_STEPOVER));
     menuAction[MA_TOOLS_SHORTCUTS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TOOLS_SHORTCUTS));
@@ -141,6 +142,7 @@ void GuiMainWindow::createMenus()
     menuAction[MA_VIEW_MODULES]=new QAction(tr("Modules"),this);
     menuAction[MA_VIEW_SYMBOLS]=new QAction(tr("Symbols"),this);
     menuAction[MA_DEBUG_RUN]=new QAction(tr("Run"),this);
+    menuAction[MA_DEBUG_STOP]=new QAction(tr("Stop"),this);
     menuAction[MA_DEBUG_STEPINTO]=new QAction(tr("Step into"),this);
     menuAction[MA_DEBUG_STEPOVER]=new QAction(tr("Step over"),this);
     menuAction[MA_TOOLS_SHORTCUTS]=new QAction(tr("Shortcuts"),this);
@@ -163,6 +165,7 @@ void GuiMainWindow::createMenus()
     pMenuView->addAction(menuAction[MA_VIEW_MODULES]);
     pMenuView->addAction(menuAction[MA_VIEW_SYMBOLS]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_RUN]);
+    pMenuDebug->addAction(menuAction[MA_DEBUG_STOP]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPINTO]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPOVER]);
     pMenuTools->addAction(menuAction[MA_TOOLS_SHORTCUTS]);
@@ -184,6 +187,7 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_VIEW_MODULES],SIGNAL(triggered()),this,SLOT(actionViewModules()));
     connect(menuAction[MA_VIEW_SYMBOLS],SIGNAL(triggered()),this,SLOT(actionViewSymbols()));
     connect(menuAction[MA_DEBUG_RUN],SIGNAL(triggered()),this,SLOT(actionDebugRun()));
+    connect(menuAction[MA_DEBUG_STOP],SIGNAL(triggered()),this,SLOT(actionDebugStop()));
     connect(menuAction[MA_DEBUG_STEPINTO],SIGNAL(triggered()),this,SLOT(actionDebugStepInto()));
     connect(menuAction[MA_DEBUG_STEPOVER],SIGNAL(triggered()),this,SLOT(actionDebugStepOver()));
     connect(menuAction[MA_TOOLS_SHORTCUTS],SIGNAL(triggered()),this,SLOT(actionToolsShortcuts()));
@@ -201,6 +205,11 @@ void GuiMainWindow::actionFileExit()
 void GuiMainWindow::actionDebugRun()
 {
     ui->widgetDebugger->debugRun();
+}
+
+void GuiMainWindow::actionDebugStop()
+{
+    ui->widgetDebugger->debugStop();
 }
 
 void GuiMainWindow::actionDebugStepInto()

@@ -56,6 +56,7 @@ class GuiMainWindow : public QMainWindow
         MA_VIEW_MODULES,
         MA_VIEW_SYMBOLS,
         MA_DEBUG_RUN,
+        MA_DEBUG_STOP,
         MA_DEBUG_STEPINTO,
         MA_DEBUG_STEPOVER,
         MA_TOOLS_SHORTCUTS,
@@ -80,6 +81,7 @@ private slots:
     void actionFileDetach();
     void actionFileExit();
     void actionDebugRun();
+    void actionDebugStop();
     void actionDebugStepInto();
     void actionDebugStepOver();
     void actionToolsOptions();
