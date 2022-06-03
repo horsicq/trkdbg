@@ -25,16 +25,16 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QSettings>
-#include "xoptions.h"
-#include "xbinary.h"
-//#include "staticscanoptionswidget.h"
-#include "searchsignaturesoptionswidget.h"
-#include "xhexviewoptionswidget.h"
-#include "xdisasmviewoptionswidget.h"
-#include "xstackviewoptionswidget.h"
-#include "xregistersviewoptionswidget.h"
-#include "xdebuggeroptionswidget.h"
 #include "../global.h"
+#include "searchsignaturesoptionswidget.h"
+#include "xbinary.h"
+#include "xdebuggeroptionswidget.h"
+#include "xdisasmviewoptionswidget.h"
+#include "xhexviewoptionswidget.h"
+#include "xoptions.h"
+#include "xregistersviewoptionswidget.h"
+#include "xstackviewoptionswidget.h"
+//#include "staticscanoptionswidget.h"
 
 namespace Ui {
 class DialogOptions;
