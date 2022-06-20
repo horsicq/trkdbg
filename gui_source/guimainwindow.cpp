@@ -27,6 +27,10 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 {
     ui->setupUi(this);
 
+//    XProcess::isRoot(this);
+
+    XProcess::setDebugPrivilege(true);
+
     setWindowTitle(XOptions::getTitle(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
 
     setAcceptDrops(true);
