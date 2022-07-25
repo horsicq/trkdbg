@@ -107,9 +107,11 @@ void GuiMainWindow::setShortcuts()
     menuAction[MA_VIEW_MODULES]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_VIEW_MODULES));
     menuAction[MA_VIEW_SYMBOLS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_VIEW_SYMBOLS));
     menuAction[MA_DEBUG_RUN]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_RUN));
-    menuAction[MA_DEBUG_STOP]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_STOP));
+    menuAction[MA_DEBUG_CLOSE]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_CLOSE));
     menuAction[MA_DEBUG_STEPINTO]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_STEPINTO));
     menuAction[MA_DEBUG_STEPOVER]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_DEBUG_STEPOVER));
+    menuAction[MA_TRACE_ANIMATEINTO]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TRACE_ANIMATEINTO));
+    menuAction[MA_TRACE_ANIMATEOVER]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TRACE_ANIMATEOVER));
     menuAction[MA_TOOLS_SHORTCUTS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TOOLS_SHORTCUTS));
     menuAction[MA_TOOLS_OPTIONS]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_TOOLS_OPTIONS));
     menuAction[MA_HELP_ABOUT]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_HELP_ABOUT));
@@ -120,14 +122,14 @@ void GuiMainWindow::createMenus()
     QMenu *pMenuFile=new QMenu(tr("File"),ui->menubar);
     QMenu *pMenuView=new QMenu(tr("View"),ui->menubar);
     QMenu *pMenuDebug=new QMenu(tr("Debug"),ui->menubar);
-    QMenu *pMenuTracing=new QMenu(tr("Tracing"),ui->menubar);
+    QMenu *pMenuTrace=new QMenu(tr("Trace"),ui->menubar);
     QMenu *pMenuTools=new QMenu(tr("Tools"),ui->menubar);
     QMenu *pMenuHelp=new QMenu(tr("Help"),ui->menubar);
 
     ui->menubar->addAction(pMenuFile->menuAction());
     ui->menubar->addAction(pMenuView->menuAction());
     ui->menubar->addAction(pMenuDebug->menuAction());
-    ui->menubar->addAction(pMenuTracing->menuAction());
+    ui->menubar->addAction(pMenuTrace->menuAction());
     ui->menubar->addAction(pMenuTools->menuAction());
     ui->menubar->addAction(pMenuHelp->menuAction());
 
@@ -146,9 +148,11 @@ void GuiMainWindow::createMenus()
     menuAction[MA_VIEW_MODULES]=new QAction(tr("Modules"),this);
     menuAction[MA_VIEW_SYMBOLS]=new QAction(tr("Symbols"),this);
     menuAction[MA_DEBUG_RUN]=new QAction(tr("Run"),this);
-    menuAction[MA_DEBUG_STOP]=new QAction(tr("Stop"),this);
+    menuAction[MA_DEBUG_CLOSE]=new QAction(tr("Close"),this);
     menuAction[MA_DEBUG_STEPINTO]=new QAction(tr("Step into"),this);
     menuAction[MA_DEBUG_STEPOVER]=new QAction(tr("Step over"),this);
+    menuAction[MA_TRACE_ANIMATEINTO]=new QAction(tr("Animate into"),this);
+    menuAction[MA_TRACE_ANIMATEOVER]=new QAction(tr("Animate over"),this);
     menuAction[MA_TOOLS_SHORTCUTS]=new QAction(tr("Shortcuts"),this);
     menuAction[MA_TOOLS_OPTIONS]=new QAction(tr("Options"),this);
     menuAction[MA_HELP_ABOUT]=new QAction(tr("About"),this);
@@ -169,9 +173,11 @@ void GuiMainWindow::createMenus()
     pMenuView->addAction(menuAction[MA_VIEW_MODULES]);
     pMenuView->addAction(menuAction[MA_VIEW_SYMBOLS]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_RUN]);
-    pMenuDebug->addAction(menuAction[MA_DEBUG_STOP]);
+    pMenuDebug->addAction(menuAction[MA_DEBUG_CLOSE]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPINTO]);
     pMenuDebug->addAction(menuAction[MA_DEBUG_STEPOVER]);
+    pMenuTrace->addAction(menuAction[MA_TRACE_ANIMATEINTO]);
+    pMenuTrace->addAction(menuAction[MA_TRACE_ANIMATEOVER]);
     pMenuTools->addAction(menuAction[MA_TOOLS_SHORTCUTS]);
     pMenuTools->addAction(menuAction[MA_TOOLS_OPTIONS]);
     pMenuHelp->addAction(menuAction[MA_HELP_ABOUT]);
@@ -191,9 +197,11 @@ void GuiMainWindow::createMenus()
     connect(menuAction[MA_VIEW_MODULES],SIGNAL(triggered()),this,SLOT(actionViewModules()));
     connect(menuAction[MA_VIEW_SYMBOLS],SIGNAL(triggered()),this,SLOT(actionViewSymbols()));
     connect(menuAction[MA_DEBUG_RUN],SIGNAL(triggered()),this,SLOT(actionDebugRun()));
-    connect(menuAction[MA_DEBUG_STOP],SIGNAL(triggered()),this,SLOT(actionDebugStop()));
+    connect(menuAction[MA_DEBUG_CLOSE],SIGNAL(triggered()),this,SLOT(actionDebugClose()));
     connect(menuAction[MA_DEBUG_STEPINTO],SIGNAL(triggered()),this,SLOT(actionDebugStepInto()));
     connect(menuAction[MA_DEBUG_STEPOVER],SIGNAL(triggered()),this,SLOT(actionDebugStepOver()));
+    connect(menuAction[MA_TRACE_ANIMATEINTO],SIGNAL(triggered()),this,SLOT(actionTraceAnimateInto()));
+    connect(menuAction[MA_TRACE_ANIMATEOVER],SIGNAL(triggered()),this,SLOT(actionTraceAnimateOver()));
     connect(menuAction[MA_TOOLS_SHORTCUTS],SIGNAL(triggered()),this,SLOT(actionToolsShortcuts()));
     connect(menuAction[MA_TOOLS_OPTIONS],SIGNAL(triggered()),this,SLOT(actionToolsOptions()));
     connect(menuAction[MA_HELP_ABOUT],SIGNAL(triggered()),this,SLOT(actionHelpAbout()));
@@ -211,9 +219,9 @@ void GuiMainWindow::actionDebugRun()
     ui->widgetDebugger->debugRun();
 }
 
-void GuiMainWindow::actionDebugStop()
+void GuiMainWindow::actionDebugClose()
 {
-    ui->widgetDebugger->debugStop();
+    ui->widgetDebugger->debugClose();
 }
 
 void GuiMainWindow::actionDebugStepInto()
@@ -224,6 +232,16 @@ void GuiMainWindow::actionDebugStepInto()
 void GuiMainWindow::actionDebugStepOver()
 {
     ui->widgetDebugger->debugStepOver();
+}
+
+void GuiMainWindow::actionTraceAnimateInto()
+{
+    //TODO
+}
+
+void GuiMainWindow::actionTraceAnimateOver()
+{
+    //TODO
 }
 
 void GuiMainWindow::actionToolsOptions()
