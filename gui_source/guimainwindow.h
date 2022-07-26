@@ -59,8 +59,9 @@ class GuiMainWindow : public QMainWindow
         MA_DEBUG_CLOSE,
         MA_DEBUG_STEPINTO,
         MA_DEBUG_STEPOVER,
-        MA_TRACE_ANIMATEINTO,
-        MA_TRACE_ANIMATEOVER,
+        MA_ANIMATE_STEPINTO,
+        MA_ANIMATE_STEPOVER,
+        MA_ANIMATE_STOP,
         MA_TOOLS_SHORTCUTS,
         MA_TOOLS_OPTIONS,
         MA_HELP_ABOUT,
@@ -86,8 +87,9 @@ private slots:
     void actionDebugClose();
     void actionDebugStepInto();
     void actionDebugStepOver();
-    void actionTraceAnimateInto();
-    void actionTraceAnimateOver();
+    void actionAnimateStepInto();
+    void actionAnimateStepOver();
+    void actionAnimateStop();
     void actionToolsOptions();
     void actionToolsShortcuts();
     void actionHelpAbout();
