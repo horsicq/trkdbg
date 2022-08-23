@@ -70,7 +70,11 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent)
 
     connect(&g_xOptions,SIGNAL(openFile(QString)),this,SLOT(handleFile(QString)));
 
+    connect(ui->widgetDebugger,SIGNAL(stateChanged()),this,SLOT(stateChanged()));
+
     createMenus();
+
+    stateChanged();
 
     adjustWindow();
 
@@ -400,4 +404,13 @@ void GuiMainWindow::actionViewModules()
 void GuiMainWindow::actionViewSymbols()
 {
     ui->widgetDebugger->viewSymbols();
+}
+
+void GuiMainWindow::stateChanged()
+{
+    XDebuggerWidget::STATE state=ui->widgetDebugger->getState();
+
+    menuAction[MA_ANIMATE_STEPINTO]->setEnabled(state.bAnimateStepInto);
+    menuAction[MA_ANIMATE_STEPOVER]->setEnabled(state.bAnimateStepOver);
+    menuAction[MA_ANIMATE_STOP]->setEnabled(state.bAnimateStop);
 }

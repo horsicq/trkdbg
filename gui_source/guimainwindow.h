@@ -102,6 +102,7 @@ private slots:
     void actionViewHandles();
     void actionViewModules();
     void actionViewSymbols();
+    void stateChanged();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
