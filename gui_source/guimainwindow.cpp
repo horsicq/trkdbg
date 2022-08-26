@@ -442,5 +442,7 @@ void GuiMainWindow::stateChanged()
     menuAction[MA_ANIMATE_STEPINTO]->setEnabled(state.bAnimateStepInto);
     menuAction[MA_ANIMATE_STEPOVER]->setEnabled(state.bAnimateStepOver);
     menuAction[MA_ANIMATE_STOP]->setEnabled(state.bAnimateStop);
-    // TODO trace
+    menuAction[MA_TRACE_STEPINTO]->setEnabled(state.bTraceStepInto);
+    menuAction[MA_TRACE_STEPOVER]->setEnabled(state.bTraceStepOver);
+    menuAction[MA_TRACE_STOP]->setEnabled(state.bTraceStop);
 }
