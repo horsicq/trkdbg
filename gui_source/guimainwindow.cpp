@@ -319,7 +319,6 @@ void GuiMainWindow::handleFile(QString sFileName)
 
     if(fi.isFile())
     {
-        // TODO Check
         if(ui->widgetDebugger->loadFile(sFileName))
         {
             g_xOptions.setLastFileName(sFileName);

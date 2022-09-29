@@ -36,4 +36,9 @@ FORMS += \
     include(../XOptions/xoptionswidget.pri)
 }
 
+!contains(XCONFIG, xaboutwidget) {
+    XCONFIG += xaboutwidget
+    include(../XAboutWidget/xaboutwidget.pri)
+}
+
 include(../build.pri)
