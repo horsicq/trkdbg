@@ -160,3 +160,6 @@
 [submodule "XWinPDB"]
 	path = XWinPDB
 	url = https://github.com/horsicq/XWinPDB
+[submodule "XExtractorWidget"]
+	path = XExtractorWidget
+	url = https://github.com/horsicq/XExtractorWidget
