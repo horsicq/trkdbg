@@ -157,9 +157,6 @@
 [submodule "XLog"]
 	path = XLog
 	url = https://github.com/horsicq/XLog
-[submodule "XExtractorWidget"]
-	path = XExtractorWidget
-	url = https://github.com/horsicq/XExtractorWidget
 [submodule "XWinPDB"]
 	path = XWinPDB
 	url = https://github.com/horsicq/XWinPDB
