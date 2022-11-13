@@ -32,4 +32,4 @@
 #define X_SHORTCUTSFILE "shortcuts.ini"
 #define X_APPLICATIONFILENAME "trkdbg"
 
-#endif // _GLOBAL_H
+#endif  // _GLOBAL_H

@@ -21,26 +21,27 @@
 #ifndef GUIMAINWINDOW_H
 #define GUIMAINWINDOW_H
 
-#include "../global.h"
 #include <QDragEnterEvent>
 #include <QFileDialog>
 #include <QMainWindow>
 #include <QMimeData>
+
+#include "../global.h"
+#include "dialogabout.h"
 #include "dialogoptions.h"
 #include "dialogshortcuts.h"
-#include "dialogabout.h"
 #include "xoptions.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class GuiMainWindow; }
+namespace Ui {
+class GuiMainWindow;
+}
 QT_END_NAMESPACE
 
-class GuiMainWindow : public QMainWindow
-{
+class GuiMainWindow : public QMainWindow {
     Q_OBJECT
 
-    enum MENUACTION
-    {
+    enum MENUACTION {
         MA_FILE_OPEN,
         MA_FILE_CLOSE,
         MA_FILE_ATTACH,
@@ -72,7 +73,7 @@ class GuiMainWindow : public QMainWindow
     };
 
 public:
-    GuiMainWindow(QWidget *pParent=nullptr);
+    GuiMainWindow(QWidget *pParent = nullptr);
     ~GuiMainWindow();
 
     void setShortcuts();
@@ -121,4 +122,4 @@ private:
     XShortcuts g_xShortcuts;
     QAction *menuAction[__MA_SIZE];
 };
-#endif // GUIMAINWINDOW_H
+#endif  // GUIMAINWINDOW_H

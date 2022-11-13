@@ -19,51 +19,48 @@
  * SOFTWARE.
  */
 #include "dialogoptions.h"
+
 #include "ui_dialogoptions.h"
 
-DialogOptions::DialogOptions(QWidget *pParent,XOptions *pOptions) :
-    QDialog(pParent),
-    ui(new Ui::DialogOptions)
-{
+DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) : QDialog(pParent), ui(new Ui::DialogOptions) {
     ui->setupUi(this);
 
-    this->g_pOptions=pOptions;
+    this->g_pOptions = pOptions;
 
-//    g_pStaticScanOptionsWidget=new StaticScanOptionsWidget(this);
-    g_pSearchSignaturesOptionsWidget=new SearchSignaturesOptionsWidget(this);
-    g_pXHexViewOptionsWidget=new XHexViewOptionsWidget(this);
-    g_pXDisasmViewOptionsWidget=new XDisasmViewOptionsWidget(this);
-    g_pXStackViewOptionsWidget=new XStackViewOptionsWidget(this);
-    g_pXRegistersViewOptionsWidget=new XRegistersViewOptionsWidget(this);
-    g_pXDebuggerOptionsWidget=new XDebuggerOptionsWidget(this);
+    //    g_pStaticScanOptionsWidget=new StaticScanOptionsWidget(this);
+    g_pSearchSignaturesOptionsWidget = new SearchSignaturesOptionsWidget(this);
+    g_pXHexViewOptionsWidget = new XHexViewOptionsWidget(this);
+    g_pXDisasmViewOptionsWidget = new XDisasmViewOptionsWidget(this);
+    g_pXStackViewOptionsWidget = new XStackViewOptionsWidget(this);
+    g_pXRegistersViewOptionsWidget = new XRegistersViewOptionsWidget(this);
+    g_pXDebuggerOptionsWidget = new XDebuggerOptionsWidget(this);
 
-    ui->widgetOptions->setOptions(pOptions,X_APPLICATIONDISPLAYNAME);
+    ui->widgetOptions->setOptions(pOptions, X_APPLICATIONDISPLAYNAME);
 
-//    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget,tr("Scan"));
-//    g_pStaticScanOptionsWidget->setOptions(pOptions);
+    //    ui->widgetOptions->addPage(g_pStaticScanOptionsWidget,tr("Scan"));
+    //    g_pStaticScanOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->addPage(g_pSearchSignaturesOptionsWidget,tr("Signatures"));
+    ui->widgetOptions->addPage(g_pSearchSignaturesOptionsWidget, tr("Signatures"));
     g_pSearchSignaturesOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->addPage(g_pXHexViewOptionsWidget,tr("Hex"));
+    ui->widgetOptions->addPage(g_pXHexViewOptionsWidget, tr("Hex"));
     g_pXHexViewOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->addPage(g_pXDisasmViewOptionsWidget,tr("Disasm"));
+    ui->widgetOptions->addPage(g_pXDisasmViewOptionsWidget, tr("Disasm"));
     g_pXDisasmViewOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->addPage(g_pXStackViewOptionsWidget,tr("Stack"));
+    ui->widgetOptions->addPage(g_pXStackViewOptionsWidget, tr("Stack"));
     g_pXStackViewOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->addPage(g_pXRegistersViewOptionsWidget,tr("Registers"));
+    ui->widgetOptions->addPage(g_pXRegistersViewOptionsWidget, tr("Registers"));
     g_pXRegistersViewOptionsWidget->setOptions(pOptions);
 
-    ui->widgetOptions->addPage(g_pXDebuggerOptionsWidget,tr("Debugger"));
+    ui->widgetOptions->addPage(g_pXDebuggerOptionsWidget, tr("Debugger"));
     g_pXDebuggerOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->setCurrentPage(1);
 }
 
-DialogOptions::~DialogOptions()
-{
+DialogOptions::~DialogOptions() {
     delete ui;
 }

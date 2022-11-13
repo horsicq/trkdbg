@@ -19,12 +19,13 @@
 // SOFTWARE.
 //
 
-#include "../global.h"
-#include <QCoreApplication>
-#include <QCommandLineParser>
 #include <QCommandLineOption>
-#include "xoptions.h"
+#include <QCommandLineParser>
+#include <QCoreApplication>
+
+#include "../global.h"
 #include "xdebugscript.h"
+#include "xoptions.h"
 #ifdef Q_OS_WIN
 #include "xwindowsdebugger.h"
 #endif
@@ -32,8 +33,7 @@
 #include "xlinuxdebugger.h"
 #endif
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
     QCoreApplication::setOrganizationDomain(X_ORGANIZATIONDOMAIN);
     QCoreApplication::setApplicationName(X_APPLICATIONNAME);
@@ -43,63 +43,60 @@ int main(int argc, char *argv[])
 
     QCommandLineParser parser;
     QString sDescription;
-    sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME,X_APPLICATIONVERSION));
+    sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
     sDescription.append(QString("%1\n").arg("Copyright(C) 2021 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
     parser.setApplicationDescription(sDescription);
     parser.addHelpOption();
     parser.addVersionOption();
 
-    parser.addPositionalArgument("file","The file to open.");
+    parser.addPositionalArgument("file", "The file to open.");
 
-    QCommandLineOption clShowConsole        (QStringList()<<    "c"<<   "showconsole",  "Show console(If target is a console application).");
-    QCommandLineOption clScript             (QStringList()<<    "s"<<   "script",       "Script <script_file_path>.","script_file_path");
+    QCommandLineOption clShowConsole(QStringList() << "c"
+                                                   << "showconsole",
+                                     "Show console(If target is a console application).");
+    QCommandLineOption clScript(QStringList() << "s"
+                                              << "script",
+                                "Script <script_file_path>.", "script_file_path");
 
     parser.addOption(clShowConsole);
     parser.addOption(clScript);
 
     parser.process(app);
 
-    QList<QString> listArgs=parser.positionalArguments();
+    QList<QString> listArgs = parser.positionalArguments();
 
-    if(listArgs.count())
-    {
+    if (listArgs.count()) {
         XInfoDB xInfoDB;
-    #ifdef Q_OS_WIN
-        XWindowsDebugger debugger(0,&xInfoDB);
-    #endif
-    #ifdef Q_OS_LINUX
-        XLinuxDebugger debugger(0,&xInfoDB);
-    #endif
-    #ifdef Q_OS_OSX
-        XOSXDebugger debugger(0,&xInfoDB);
-    #endif
+#ifdef Q_OS_WIN
+        XWindowsDebugger debugger(0, &xInfoDB);
+#endif
+#ifdef Q_OS_LINUX
+        XLinuxDebugger debugger(0, &xInfoDB);
+#endif
+#ifdef Q_OS_OSX
+        XOSXDebugger debugger(0, &xInfoDB);
+#endif
 
-        XAbstractDebugger::OPTIONS options={};
+        XAbstractDebugger::OPTIONS options = {};
 
-        options.bShowConsole=parser.isSet(clShowConsole);
-        options.sFileName=listArgs.at(0);
-        options.bBreakpointOnProgramEntryPoint=true;
+        options.bShowConsole = parser.isSet(clShowConsole);
+        options.sFileName = listArgs.at(0);
+        options.bBreakpointOnProgramEntryPoint = true;
 
         debugger.setOptions(options);
 
-        QString sScript=parser.value(clScript);
+        QString sScript = parser.value(clScript);
 
-        if(XBinary::isFileExists(sScript))
-        {
+        if (XBinary::isFileExists(sScript)) {
             XDebugScript debugScript;
 
-            if(debugScript.setData(&debugger,sScript))
-            {
+            if (debugScript.setData(&debugger, sScript)) {
                 debugger.load();
             }
-        }
-        else
-        {
+        } else {
             // TODO Error
         }
-    }
-    else
-    {
+    } else {
         parser.showHelp();
         Q_UNREACHABLE();
     }
