@@ -22,7 +22,8 @@
 
 #include "ui_dialogoptions.h"
 
-DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) : QDialog(pParent), ui(new Ui::DialogOptions) {
+DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) : QDialog(pParent), ui(new Ui::DialogOptions)
+{
     ui->setupUi(this);
 
     this->g_pOptions = pOptions;
@@ -61,6 +62,7 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) : QDialog(pPa
     ui->widgetOptions->setCurrentPage(1);
 }
 
-DialogOptions::~DialogOptions() {
+DialogOptions::~DialogOptions()
+{
     delete ui;
 }

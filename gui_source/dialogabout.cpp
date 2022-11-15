@@ -22,10 +22,12 @@
 
 #include "ui_dialogabout.h"
 
-DialogAbout::DialogAbout(QWidget *pParent) : QDialog(pParent), ui(new Ui::DialogAbout) {
+DialogAbout::DialogAbout(QWidget *pParent) : QDialog(pParent), ui(new Ui::DialogAbout)
+{
     ui->setupUi(this);
 }
 
-DialogAbout::~DialogAbout() {
+DialogAbout::~DialogAbout()
+{
     delete ui;
 }

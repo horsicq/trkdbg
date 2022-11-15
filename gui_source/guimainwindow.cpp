@@ -22,7 +22,8 @@
 
 #include "ui_guimainwindow.h"
 
-GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui::GuiMainWindow) {
+GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui::GuiMainWindow)
+{
     ui->setupUi(this);
 
     //    XProcess::isRoot(this);
@@ -83,14 +84,16 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     }
 }
 
-GuiMainWindow::~GuiMainWindow() {
+GuiMainWindow::~GuiMainWindow()
+{
     g_xOptions.save();
     g_xShortcuts.save();
 
     delete ui;
 }
 
-void GuiMainWindow::setShortcuts() {
+void GuiMainWindow::setShortcuts()
+{
     menuAction[MA_FILE_OPEN]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_OPEN));
     menuAction[MA_FILE_CLOSE]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_CLOSE));
     menuAction[MA_FILE_ATTACH]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_FILE_ATTACH));
@@ -120,7 +123,8 @@ void GuiMainWindow::setShortcuts() {
     menuAction[MA_HELP_ABOUT]->setShortcut(g_xShortcuts.getShortcut(X_ID_DEBUGGER_HELP_ABOUT));
 }
 
-void GuiMainWindow::createMenus() {
+void GuiMainWindow::createMenus()
+{
     QMenu *pMenuFile = new QMenu(tr("File"), ui->menubar);
     QMenu *pMenuView = new QMenu(tr("View"), ui->menubar);
     QMenu *pMenuDebug = new QMenu(tr("Debug"), ui->menubar);
@@ -224,52 +228,64 @@ void GuiMainWindow::createMenus() {
     // TODO
 }
 
-void GuiMainWindow::actionFileExit() {
+void GuiMainWindow::actionFileExit()
+{
     // TODO
     this->close();
 }
 
-void GuiMainWindow::actionDebugRun() {
+void GuiMainWindow::actionDebugRun()
+{
     ui->widgetDebugger->debugRun();
 }
 
-void GuiMainWindow::actionDebugClose() {
+void GuiMainWindow::actionDebugClose()
+{
     ui->widgetDebugger->debugClose();
 }
 
-void GuiMainWindow::actionDebugStepInto() {
+void GuiMainWindow::actionDebugStepInto()
+{
     ui->widgetDebugger->debugStepInto();
 }
 
-void GuiMainWindow::actionDebugStepOver() {
+void GuiMainWindow::actionDebugStepOver()
+{
     ui->widgetDebugger->debugStepOver();
 }
 
-void GuiMainWindow::actionAnimateStepInto() {
+void GuiMainWindow::actionAnimateStepInto()
+{
     ui->widgetDebugger->animateStepInto();
 }
 
-void GuiMainWindow::actionAnimateStepOver() {
+void GuiMainWindow::actionAnimateStepOver()
+{
     ui->widgetDebugger->animateStepOver();
 }
 
-void GuiMainWindow::actionAnimateStop() {
+void GuiMainWindow::actionAnimateStop()
+{
     ui->widgetDebugger->animateStop();
 }
 
-void GuiMainWindow::actionTraceStepInto() {
+void GuiMainWindow::actionTraceStepInto()
+{
     ui->widgetDebugger->traceStepInto();
 }
 
-void GuiMainWindow::actionTraceStepOver() {
+void GuiMainWindow::actionTraceStepOver()
+{
     ui->widgetDebugger->traceStepOver();
 }
 
-void GuiMainWindow::actionTraceStop() {
+void GuiMainWindow::actionTraceStop()
+{
     ui->widgetDebugger->traceStop();
 }
 
-void GuiMainWindow::actionToolsOptions() {
+void GuiMainWindow::actionToolsOptions()
+{
     DialogOptions dialogOptions(this, &g_xOptions);
 
     dialogOptions.exec();
@@ -277,7 +293,8 @@ void GuiMainWindow::actionToolsOptions() {
     adjustWindow();
 }
 
-void GuiMainWindow::actionToolsShortcuts() {
+void GuiMainWindow::actionToolsShortcuts()
+{
     DialogShortcuts dialogShortcuts(this);
 
     dialogShortcuts.setData(&g_xShortcuts);
@@ -287,13 +304,15 @@ void GuiMainWindow::actionToolsShortcuts() {
     setShortcuts();
 }
 
-void GuiMainWindow::actionHelpAbout() {
+void GuiMainWindow::actionHelpAbout()
+{
     DialogAbout dialogAbout(this);
 
     dialogAbout.exec();
 }
 
-void GuiMainWindow::handleFile(QString sFileName) {
+void GuiMainWindow::handleFile(QString sFileName)
+{
     QFileInfo fi(sFileName);
 
     if (fi.isFile()) {
@@ -303,13 +322,15 @@ void GuiMainWindow::handleFile(QString sFileName) {
     }
 }
 
-void GuiMainWindow::adjustWindow() {
+void GuiMainWindow::adjustWindow()
+{
     g_xOptions.adjustStayOnTop(this);
     g_xOptions.adjustFont(this);
     ui->widgetDebugger->adjustView();
 }
 
-void GuiMainWindow::actionFileOpen() {
+void GuiMainWindow::actionFileOpen()
+{
     QString sDirectory = g_xOptions.getLastDirectory();
 
     QString sFileName = QFileDialog::getOpenFileName(this, tr("Open file") + QString("..."), sDirectory, tr("All files") + QString(" (*)"));  // TODO extension
@@ -319,27 +340,33 @@ void GuiMainWindow::actionFileOpen() {
     }
 }
 
-void GuiMainWindow::actionFileClose() {
+void GuiMainWindow::actionFileClose()
+{
     // TODO
 }
 
-void GuiMainWindow::actionFileAttach() {
+void GuiMainWindow::actionFileAttach()
+{
     // TODO
 }
 
-void GuiMainWindow::actionFileDetach() {
+void GuiMainWindow::actionFileDetach()
+{
     // TODO
 }
 
-void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent) {
+void GuiMainWindow::dragEnterEvent(QDragEnterEvent *pEvent)
+{
     pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent) {
+void GuiMainWindow::dragMoveEvent(QDragMoveEvent *pEvent)
+{
     pEvent->acceptProposedAction();
 }
 
-void GuiMainWindow::dropEvent(QDropEvent *pEvent) {
+void GuiMainWindow::dropEvent(QDropEvent *pEvent)
+{
     const QMimeData *pMimeData = pEvent->mimeData();
 
     if (pMimeData->hasUrls()) {
@@ -355,43 +382,53 @@ void GuiMainWindow::dropEvent(QDropEvent *pEvent) {
     }
 }
 
-void GuiMainWindow::actionViewCPU() {
+void GuiMainWindow::actionViewCPU()
+{
     ui->widgetDebugger->viewCPU();
 }
 
-void GuiMainWindow::actionViewLog() {
+void GuiMainWindow::actionViewLog()
+{
     ui->widgetDebugger->viewLog();
 }
 
-void GuiMainWindow::actionViewBreakpoint() {
+void GuiMainWindow::actionViewBreakpoint()
+{
     ui->widgetDebugger->viewBreakpoints();
 }
 
-void GuiMainWindow::actionViewMemoryMap() {
+void GuiMainWindow::actionViewMemoryMap()
+{
     ui->widgetDebugger->viewMemoryMap();
 }
 
-void GuiMainWindow::actionViewCallStack() {
+void GuiMainWindow::actionViewCallStack()
+{
     ui->widgetDebugger->viewCallstack();
 }
 
-void GuiMainWindow::actionViewThreads() {
+void GuiMainWindow::actionViewThreads()
+{
     ui->widgetDebugger->viewThreads();
 }
 
-void GuiMainWindow::actionViewHandles() {
+void GuiMainWindow::actionViewHandles()
+{
     ui->widgetDebugger->viewHandles();
 }
 
-void GuiMainWindow::actionViewModules() {
+void GuiMainWindow::actionViewModules()
+{
     ui->widgetDebugger->viewModules();
 }
 
-void GuiMainWindow::actionViewSymbols() {
+void GuiMainWindow::actionViewSymbols()
+{
     ui->widgetDebugger->viewSymbols();
 }
 
-void GuiMainWindow::stateChanged() {
+void GuiMainWindow::stateChanged()
+{
     XDebuggerWidget::STATE state = ui->widgetDebugger->getState();
 
     menuAction[MA_ANIMATE_STEPINTO]->setEnabled(state.bAnimateStepInto);
