@@ -35,7 +35,7 @@
 #include "xoptions.h"
 #include "xregistersviewoptionswidget.h"
 #include "xstackviewoptionswidget.h"
-//#include "staticscanoptionswidget.h"
+// #include "staticscanoptionswidget.h"
 
 namespace Ui {
 class DialogOptions;
