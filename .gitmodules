@@ -169,3 +169,6 @@
 [submodule "XUpdate"]
 	path = XUpdate
 	url = https://github.com/horsicq/XUpdate
+[submodule "XCallStackWidget"]
+	path = XCallStackWidget
+	url = https://github.com/horsicq/XCallStackWidget
