@@ -172,3 +172,6 @@
 [submodule "XCallStackWidget"]
 	path = XCallStackWidget
 	url = https://github.com/horsicq/XCallStackWidget
+[submodule "XVisualizationWidget"]
+	path = XVisualizationWidget
+	url = https://github.com/horsicq/XVisualizationWidget
