@@ -1,4 +1,4 @@
-// Copyright (c) 2021 hors<horsicq@gmail.com>
+// Copyright (c) 2021-2023 hors<horsicq@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@
 
 #include "../global.h"
 #include "xdebugscript.h"
+#include "xdebuggerconsole.h"
 #include "xoptions.h"
 #ifdef Q_OS_WIN
 #include "xwindowsdebugger.h"
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     QString sDescription;
     sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
-    sDescription.append(QString("%1\n").arg("Copyright(C) 2021 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
+    sDescription.append(QString("%1\n").arg("Copyright(C) 2023 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
     parser.setApplicationDescription(sDescription);
     parser.addHelpOption();
     parser.addVersionOption();
@@ -67,35 +68,43 @@ int main(int argc, char *argv[])
     QList<QString> listArgs = parser.positionalArguments();
 
     if (listArgs.count()) {
-        XInfoDB xInfoDB;
-#ifdef Q_OS_WIN
-        XWindowsDebugger debugger(0, &xInfoDB);
-#endif
-#ifdef Q_OS_LINUX
-        XLinuxDebugger debugger(0, &xInfoDB);
-#endif
-#ifdef Q_OS_OSX
-        XOSXDebugger debugger(0, &xInfoDB);
-#endif
+        QString sFileName = listArgs.at(0);
 
         XAbstractDebugger::OPTIONS options = {};
 
         options.bShowConsole = parser.isSet(clShowConsole);
-        options.sFileName = listArgs.at(0);
+        options.sFileName = sFileName;
         options.bBreakpointOnProgramEntryPoint = true;
 
-        debugger.setOptions(options);
+        if (parser.isSet(clScript)) {
+            // Script
+            QString sScript = parser.value(clScript);
 
-        QString sScript = parser.value(clScript);
+            if (XBinary::isFileExists(sScript)) {
+                XInfoDB xInfoDB;
+                xInfoDB.setDebuggerState(true);
+        #ifdef Q_OS_WIN
+                XWindowsDebugger debugger(0, &xInfoDB);
+        #endif
+        #ifdef Q_OS_LINUX
+                XLinuxDebugger debugger(0, &xInfoDB);
+        #endif
+        #ifdef Q_OS_OSX
+                XOSXDebugger debugger(0, &xInfoDB);
+        #endif
+                debugger.setOptions(options);
 
-        if (XBinary::isFileExists(sScript)) {
-            XDebugScript debugScript;
+                XDebugScript debugScript;
 
-            if (debugScript.setData(&debugger, sScript)) {
-                debugger.load();
+                if (debugScript.setData(&debugger, sScript)) {
+                    debugger.load();
+                }
+            } else {
+                // TODO error
             }
         } else {
-            // TODO Error
+            XDebuggerConsole debuggerConsole;
+            debuggerConsole.run(options);
         }
     } else {
         parser.showHelp();
