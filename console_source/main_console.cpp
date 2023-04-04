@@ -83,15 +83,15 @@ int main(int argc, char *argv[])
             if (XBinary::isFileExists(sScript)) {
                 XInfoDB xInfoDB;
                 xInfoDB.setDebuggerState(true);
-        #ifdef Q_OS_WIN
+#ifdef Q_OS_WIN
                 XWindowsDebugger debugger(0, &xInfoDB);
-        #endif
-        #ifdef Q_OS_LINUX
+#endif
+#ifdef Q_OS_LINUX
                 XLinuxDebugger debugger(0, &xInfoDB);
-        #endif
-        #ifdef Q_OS_OSX
+#endif
+#ifdef Q_OS_OSX
                 XOSXDebugger debugger(0, &xInfoDB);
-        #endif
+#endif
                 debugger.setOptions(options);
 
                 XDebugScript debugScript;
