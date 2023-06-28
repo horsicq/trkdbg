@@ -80,7 +80,7 @@ public:
 
 private slots:
     void createMenus();
-    void handleFile(QString sFileName);
+    void handleFile(const QString &sFileName);
     void adjustWindow();
     void actionFileOpen();
     void actionFileClose();

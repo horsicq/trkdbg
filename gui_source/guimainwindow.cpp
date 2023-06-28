@@ -60,7 +60,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     g_xOptions.load();
 
     g_xShortcuts.setName(X_SHORTCUTSFILE);
-    g_xShortcuts.setNative(g_xOptions.isNative());
+    g_xShortcuts.setNative(g_xOptions.isNative(), g_xOptions.getApplicationDataPath());
 
     g_xShortcuts.addGroup(XShortcuts::GROUPID_DEBUGGER);
     g_xShortcuts.load();
@@ -311,7 +311,7 @@ void GuiMainWindow::actionHelpAbout()
     dialogAbout.exec();
 }
 
-void GuiMainWindow::handleFile(QString sFileName)
+void GuiMainWindow::handleFile(const QString &sFileName)
 {
     QFileInfo fi(sFileName);
 
