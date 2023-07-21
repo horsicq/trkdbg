@@ -301,6 +301,7 @@ void GuiMainWindow::actionToolsShortcuts()
 
     dialogShortcuts.exec();
 
+    ui->widgetDebugger->reloadShortcuts();
     setShortcuts();
 }
 
