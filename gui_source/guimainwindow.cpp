@@ -348,7 +348,7 @@ void GuiMainWindow::actionFileClose()
 
 void GuiMainWindow::actionFileAttach()
 {
-    // TODO
+    // TODO Processes dialog
 }
 
 void GuiMainWindow::actionFileDetach()
