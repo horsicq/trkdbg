@@ -81,7 +81,7 @@ public:
 private slots:
     void createMenus();
     void handleFile(const QString &sFileName);
-    void errorMessage(const QString &sText);
+    void errorMessageSlot(const QString &sText);
     void adjustWindow();
     void actionFileOpen();
     void actionFileClose();

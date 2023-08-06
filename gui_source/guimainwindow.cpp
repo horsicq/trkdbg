@@ -68,7 +68,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     ui->widgetDebugger->setGlobal(&g_xShortcuts, &g_xOptions);
 
     connect(&g_xOptions, SIGNAL(openFile(QString)), this, SLOT(handleFile(QString)));
-    connect(&g_xOptions, SIGNAL(errorMessage(QString)), this, SLOT(errorMessage(QString)));
+    connect(&g_xOptions, SIGNAL(errorMessage(QString)), this, SLOT(errorMessageSlot(QString)));
 
     connect(ui->widgetDebugger, SIGNAL(stateChanged()), this, SLOT(stateChanged()));
 
@@ -324,7 +324,7 @@ void GuiMainWindow::handleFile(const QString &sFileName)
     }
 }
 
-void GuiMainWindow::errorMessage(const QString &sText)
+void GuiMainWindow::errorMessageSlot(const QString &sText)
 {
     QMessageBox::critical(this, tr("Error"), sText);
 }
