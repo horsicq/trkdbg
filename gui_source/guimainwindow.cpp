@@ -73,11 +73,8 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     connect(ui->widgetDebugger, SIGNAL(stateChanged()), this, SLOT(stateChanged()));
 
     createMenus();
-
     stateChanged();
-
     adjustWindow();
-
     setShortcuts();
 
     if (QCoreApplication::arguments().count() > 1) {
