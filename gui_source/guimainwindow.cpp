@@ -315,7 +315,7 @@ void GuiMainWindow::handleFile(const QString &sFileName)
     QFileInfo fi(sFileName);
 
     if (fi.isFile()) {
-        if (ui->widgetDebugger->loadFile(sFileName)) {
+        if (ui->widgetDebugger->loadFile(sFileName, true)) {
             g_xOptions.setLastFileName(sFileName);
         }
     }
