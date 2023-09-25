@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 
         options.bShowConsole = parser.isSet(clShowConsole);
         options.sFileName = sFileName;
-        options.bBreakpointOnProgramEntryPoint = true;
+        options.bBreakpointEntryPoint = true;
 
         if (parser.isSet(clScript)) {
             // Script
