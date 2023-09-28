@@ -72,9 +72,16 @@ int main(int argc, char *argv[])
 
         XAbstractDebugger::OPTIONS options = {};
 
-        options.bShowConsole = parser.isSet(clShowConsole);
+        if (parser.isSet(clShowConsole)) {
+            options.records[XAbstractDebugger::OPTIONS_TYPE_SHOWCONSOLE].bValid = true;
+            options.records[XAbstractDebugger::OPTIONS_TYPE_SHOWCONSOLE].varValue = true;
+        }
         options.sFileName = sFileName;
-        options.bBreakpointEntryPoint = true;
+
+        if (parser.isSet(clShowConsole)) {
+            options.records[XAbstractDebugger::OPTIONS_TYPE_BREAKPOINTENTRYPOINT].bValid = true;
+            options.records[XAbstractDebugger::OPTIONS_TYPE_BREAKPOINTENTRYPOINT].varValue = true;
+        }
 
         if (parser.isSet(clScript)) {
             // Script
