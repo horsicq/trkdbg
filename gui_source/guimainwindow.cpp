@@ -26,6 +26,10 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
 {
     ui->setupUi(this);
 
+#ifdef QT_DEBUG
+    XOptions::getBundle();
+#endif
+
     //    XProcess::isRoot(this);
 
     XProcess::setDebugPrivilege(true);
