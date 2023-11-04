@@ -53,14 +53,14 @@ int main(int argc, char *argv[])
 
     parser.addPositionalArgument("file", "The file to open.");
 
-//    QCommandLineOption clShowConsole(QStringList() << "c"
-//                                                   << "showconsole",
-//                                     "Show console(If target is a console application).");
+    //    QCommandLineOption clShowConsole(QStringList() << "c"
+    //                                                   << "showconsole",
+    //                                     "Show console(If target is a console application).");
     QCommandLineOption clScript(QStringList() << "s"
                                               << "script",
                                 "Script <script_file_path>.", "script_file_path");
 
-//    parser.addOption(clShowConsole);
+    //    parser.addOption(clShowConsole);
     parser.addOption(clScript);
 
     parser.process(app);
