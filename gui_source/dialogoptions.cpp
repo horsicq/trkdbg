@@ -48,7 +48,7 @@ DialogOptions::DialogOptions(QWidget *pParent, XOptions *pOptions) : QDialog(pPa
     g_pXHexViewOptionsWidget->setOptions(pOptions);
 
     ui->widgetOptions->addPage(g_pXDisasmViewOptionsWidget, tr("Disasm"));
-    g_pXDisasmViewOptionsWidget->setOptions(pOptions);
+    g_pXDisasmViewOptionsWidget->setOptions(pOptions, XDisasmViewOptionsWidget::MODE_X86); // TODO ARM
 
     ui->widgetOptions->addPage(g_pXStackViewOptionsWidget, tr("Stack"));
     g_pXStackViewOptionsWidget->setOptions(pOptions);
