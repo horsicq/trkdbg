@@ -56,7 +56,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     //    StaticScanOptionsWidget::setDefaultValues(&g_xOptions);
     SearchSignaturesOptionsWidget::setDefaultValues(&g_xOptions);
     XHexViewOptionsWidget::setDefaultValues(&g_xOptions);
-    XDisasmViewOptionsWidget::setDefaultValues(&g_xOptions, XDisasmViewOptionsWidget::MODE_X86); // TODO ARM
+    XDisasmViewOptionsWidget::setDefaultValues(&g_xOptions, XDisasmViewOptionsWidget::MODE_X86);  // TODO ARM
     XStackViewOptionsWidget::setDefaultValues(&g_xOptions);
     XRegistersViewOptionsWidget::setDefaultValues(&g_xOptions);
     XDebuggerOptionsWidget::setDefaultValues(&g_xOptions);
