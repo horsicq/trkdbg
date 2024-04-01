@@ -19,12 +19,10 @@ add_definitions(-DUSE_YARA)
 add_definitions(-DUSE_XPROCESS)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XDebuggerWidget/xdebuggerwidget.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XOptions/xoptionswidget.cmake)
 include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XAboutWidget/xaboutwidget.cmake)
 
 set(PROJECT_SOURCES
-        ${XPROCESSWIDGETADVANCED_SOURCES}
-        ${XOPTIONSWIDGET_SOURCES}
+        ${XDEBUGGERWIDGET_SOURCES}
         ${XABOUTWIDGET_SOURCES}
         dialogabout.cpp
         dialogabout.h
