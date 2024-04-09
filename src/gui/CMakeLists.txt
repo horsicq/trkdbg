@@ -44,6 +44,7 @@ if(WIN32)
 else()
     add_executable(trkdbg
         ${PROJECT_SOURCES}
+        ../../res/resource.rc
     )
 endif()
 
