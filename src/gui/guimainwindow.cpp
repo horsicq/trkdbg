@@ -148,7 +148,7 @@ void GuiMainWindow::createMenus()
     menuAction[MA_FILE_ATTACH] = new QAction(tr("Attach"), this);
     menuAction[MA_FILE_DETACH] = new QAction(tr("Detach"), this);
     menuAction[MA_FILE_EXIT] = new QAction(tr("Exit"), this);
-    menuAction[MA_VIEW_CPU] = new QAction(tr("CPU"), this);
+    menuAction[MA_VIEW_CPU] = new QAction(QString("CPU"), this);
     menuAction[MA_VIEW_LOG] = new QAction(tr("Log"), this);
     menuAction[MA_VIEW_BREAKPOINTS] = new QAction(tr("Breakpoints"), this);
     menuAction[MA_VIEW_MEMORYMAP] = new QAction(tr("Memory map"), this);
