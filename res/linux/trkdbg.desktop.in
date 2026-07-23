@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=@PROJECT_VERSION@
+Type=Application
+Name=TrkDbg
+Comment=@X_DESCRIPTION@
+TryExec=trkdbg
+Exec=trkdbg
+Icon=trkdbg
+Terminal=false
+Categories=Development;
