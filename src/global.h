@@ -1,4 +1,4 @@
-/* Copyright (c) 2021-2023 hors<horsicq@gmail.com>
+/* Copyright (c) 2021-2026 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -18,18 +18,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef _GLOBAL_H
-#define _GLOBAL_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
-#include <QString>
+#include <QtGlobal>
 
-#define X_APPLICATIONNAME "trkdbg"
 #define X_APPLICATIONDISPLAYNAME "TrkDbg"
-#define X_APPLICATIONVERSION "0.01"
+#define X_APPLICATIONNAME "trkdbg"
+#define X_APPLICATIONVERSION "0.1.0"
 #define X_ORGANIZATIONNAME "NTInfo"
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 #define X_OPTIONSFILE "trkdbg.ini"
 #define X_SHORTCUTSFILE "shortcuts.ini"
 #define X_APPLICATIONFILENAME "trkdbg"
 
-#endif  // _GLOBAL_H
+#endif  // GLOBAL_H

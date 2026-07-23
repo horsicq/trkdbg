@@ -1,4 +1,4 @@
-/* Copyright (c) 2021-2024 hors<horsicq@gmail.com>
+/* Copyright (c) 2021-2026 hors<horsicq@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -19,9 +19,22 @@
  * SOFTWARE.
  */
 #include <QApplication>
-#include <QStyleFactory>
+#include <QIcon>
+#include <cstdio>
 
 #include "guimainwindow.h"
+
+namespace {
+
+void configureApplicationMetadata()
+{
+    QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
+    QCoreApplication::setOrganizationDomain(X_ORGANIZATIONDOMAIN);
+    QCoreApplication::setApplicationName(X_APPLICATIONNAME);
+    QCoreApplication::setApplicationVersion(X_APPLICATIONVERSION);
+}
+
+}  // namespace
 
 int main(int argc, char *argv[])
 {
@@ -36,10 +49,7 @@ int main(int argc, char *argv[])
 #endif
 #endif
 
-    QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
-    QCoreApplication::setOrganizationDomain(X_ORGANIZATIONDOMAIN);
-    QCoreApplication::setApplicationName(X_APPLICATIONNAME);
-    QCoreApplication::setApplicationVersion(X_APPLICATIONVERSION);
+    configureApplicationMetadata();
 
     if ((argc == 2) && ((QString(argv[1]) == "--version") || (QString(argv[1]) == "-v"))) {
         QString sInfo = QString("%1 v%2").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION);
@@ -48,7 +58,14 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    QApplication a(argc, argv);
+    QApplication application(argc, argv);
+    application.setWindowIcon(QIcon(QStringLiteral(":/images/logo.png")));
+
+#ifdef Q_OS_LINUX
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+    application.setDesktopFileName(QStringLiteral(X_APPLICATIONNAME));
+#endif
+#endif
 
     XOptions xOptions;
 
@@ -63,8 +80,8 @@ int main(int argc, char *argv[])
 
     XOptions::adjustApplicationView(X_APPLICATIONNAME, &xOptions);
 
-    GuiMainWindow w;
-    w.show();
+    GuiMainWindow window;
+    window.show();
 
-    return a.exec();
+    return application.exec();
 }
