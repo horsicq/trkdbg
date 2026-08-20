@@ -24,6 +24,7 @@ endif()
 # --- Version from file ---
 file(STRINGS ${CMAKE_CURRENT_LIST_DIR}/../release_version.txt X_PROJECT_VERSION)
 project(TrkDbg VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
+option(USE_DIE "Enable Detect It Easy integration" ON)
 
 # --- Project identity variables (used by deploy_init.cmake and RC templates) ---
 set(X_COMPANYNAME "ntinfo")
