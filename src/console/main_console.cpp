@@ -22,6 +22,8 @@
 #include <QCommandLineOption>
 #include <QCommandLineParser>
 #include <QCoreApplication>
+#include <QFileInfo>
+#include <QTextStream>
 
 #include "../global.h"
 #include "xdebugscript.h"
@@ -32,6 +34,9 @@
 #endif
 #ifdef Q_OS_LINUX
 #include "xlinuxdebugger.h"
+#endif
+#ifdef Q_OS_MACOS
+#include "xosxdebugger.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -46,7 +51,7 @@ int main(int argc, char *argv[])
     QCommandLineParser parser;
     QString sDescription;
     sDescription.append(QString("%1 v%2\n").arg(X_APPLICATIONDISPLAYNAME, X_APPLICATIONVERSION));
-    sDescription.append(QString("%1\n").arg("Copyright(C) 2023-2024 hors<horsicq@gmail.com> Web: http://ntinfo.biz"));
+    sDescription.append(QString("%1\n").arg("Copyright(C) 2020-2026 hors<horsicq@gmail.com> Web: https://ntinfo.biz"));
     parser.setApplicationDescription(sDescription);
     parser.addHelpOption();
     parser.addVersionOption();
@@ -65,49 +70,96 @@ int main(int argc, char *argv[])
 
     parser.process(app);
 
-    QList<QString> listArgs = parser.positionalArguments();
+    const QList<QString> listArgs = parser.positionalArguments();
+    QTextStream streamError(stderr);
 
-    if (listArgs.count()) {
-        XProcess::setDebugPrivilege(true);
+    enum EXIT_CODE {
+        EXIT_OK = 0,
+        EXIT_USAGE = 2,
+        EXIT_INPUT = 3,
+        EXIT_SCRIPT = 4,
+        EXIT_DEBUGGER = 5
+    };
 
-        QString sFileName = listArgs.at(0);
-
-        XAbstractDebugger::OPTIONS options = XAbstractDebugger::getDefaultOptions(sFileName);
-
-        if (parser.isSet(clScript)) {
-            // Script
-            QString sScript = parser.value(clScript);
-
-            if (XBinary::isFileExists(sScript)) {
-                XInfoDB xInfoDB;
-                xInfoDB.setDebuggerState(true);
-#ifdef Q_OS_WIN
-                XWindowsDebugger debugger(0, &xInfoDB);
-#endif
-#ifdef Q_OS_LINUX
-                XLinuxDebugger debugger(0, &xInfoDB);
-#endif
-#ifdef Q_OS_OSX
-                XOSXDebugger debugger(0, &xInfoDB);
-#endif
-                debugger.setOptions(options);
-
-                XDebugScript debugScript;
-
-                if (debugScript.setData(&debugger, sScript)) {
-                    debugger.load();
-                }
-            } else {
-                // TODO error
-            }
-        } else {
-            XDebuggerConsole debuggerConsole;
-            debuggerConsole.run(options);
-        }
-    } else {
-        parser.showHelp();
-        Q_UNREACHABLE();
+    if (listArgs.count() != 1) {
+        streamError << "Error: exactly one target file is required.\n\n" << parser.helpText();
+        return EXIT_USAGE;
     }
 
-    return 0;
+    const QFileInfo targetInfo(listArgs.constFirst());
+
+    if ((!targetInfo.exists()) || (!targetInfo.isFile())) {
+        streamError << "Error: target file does not exist: " << targetInfo.absoluteFilePath() << Qt::endl;
+        return EXIT_INPUT;
+    }
+
+    XProcess::setDebugPrivilege(true);
+
+    const QString sFileName = targetInfo.absoluteFilePath();
+    XAbstractDebugger::OPTIONS options = XAbstractDebugger::getDefaultOptions(sFileName);
+
+    if (parser.isSet(clScript)) {
+        const QFileInfo scriptInfo(parser.value(clScript));
+
+        if ((!scriptInfo.exists()) || (!scriptInfo.isFile())) {
+            streamError << "Error: script file does not exist: " << scriptInfo.absoluteFilePath() << Qt::endl;
+            return EXIT_SCRIPT;
+        }
+
+        XInfoDB xInfoDB;
+        xInfoDB.setDebuggerState(true);
+#ifdef Q_OS_WIN
+        XWindowsDebugger debugger(0, &xInfoDB);
+#endif
+#ifdef Q_OS_LINUX
+        XLinuxDebugger debugger(0, &xInfoDB);
+#endif
+#ifdef Q_OS_MACOS
+        XOSXDebugger debugger(0, &xInfoDB);
+#endif
+        debugger.setOptions(options);
+
+        XDebugScript debugScript;
+
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+        // Unix backends are driven by a zero-delay QTimer. Keep the application alive until the
+        // traced process actually exits; otherwise the stack debugger and script are destroyed
+        // immediately after load() schedules its first poll.
+        bool bProcessExited = false;
+        QObject::connect(
+            &debugger, &XAbstractDebugger::eventExitProcess, &app,
+            [&app, &bProcessExited](XInfoDB::EXITPROCESS_INFO *) {
+                bProcessExited = true;
+                app.quit();
+            },
+            Qt::DirectConnection);
+#endif
+
+        if (!debugScript.setData(&debugger, scriptInfo.absoluteFilePath())) {
+            streamError << "Error: failed to load or evaluate script: " << scriptInfo.absoluteFilePath() << Qt::endl;
+            return EXIT_SCRIPT;
+        }
+
+        if (!debugger.load()) {
+            streamError << "Error: debugger could not start target: " << sFileName << Qt::endl;
+            return EXIT_DEBUGGER;
+        }
+
+#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+        const int nEventLoopResult = bProcessExited ? 0 : app.exec();
+        if ((nEventLoopResult != 0) || (!bProcessExited)) {
+            streamError << "Error: debugger event loop stopped unexpectedly for target: " << sFileName << Qt::endl;
+            return EXIT_DEBUGGER;
+        }
+#endif
+    } else {
+        XDebuggerConsole debuggerConsole;
+
+        if (!debuggerConsole.run(options)) {
+            streamError << "Error: debugger could not start target: " << sFileName << Qt::endl;
+            return EXIT_DEBUGGER;
+        }
+    }
+
+    return EXIT_OK;
 }

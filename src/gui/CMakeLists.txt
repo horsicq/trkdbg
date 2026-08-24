@@ -93,10 +93,16 @@ if(TARGET trkdbg_translations)
 endif()
 
 # --- Install rules ---
+# Runtime data goes to X_RESOURCES, never to CMAKE_INSTALL_LIBDIR. XOptions::
+# convertPathName("$data/...") searches a fixed list that does not include the
+# Debian multiarch lib/x86_64-linux-gnu, so data installed there is invisible to
+# the running application. X_RESOURCES already resolves to "." on Windows,
+# "<app>.app/Contents/Resources" on macOS and "lib/<app>" on Linux.
+set(TRKDBG_DATA_INSTALL_DESTINATION "${X_RESOURCES}")
+
 if(UNIX AND NOT APPLE)
     set(TRKDBG_RUNTIME_INSTALL_DESTINATION "${CMAKE_INSTALL_BINDIR}")
     set(TRKDBG_DOC_INSTALL_DESTINATION "${CMAKE_INSTALL_DOCDIR}/trkdbg")
-    set(TRKDBG_DATA_INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/trkdbg")
     set(TRKDBG_DESKTOP_FILE "${CMAKE_CURRENT_BINARY_DIR}/trkdbg.desktop")
 
     configure_file(
@@ -107,7 +113,6 @@ if(UNIX AND NOT APPLE)
 else()
     set(TRKDBG_RUNTIME_INSTALL_DESTINATION ".")
     set(TRKDBG_DOC_INSTALL_DESTINATION ".")
-    set(TRKDBG_DATA_INSTALL_DESTINATION ".")
 endif()
 
 install(TARGETS TrkDbg

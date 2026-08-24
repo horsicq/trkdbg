@@ -23,6 +23,8 @@
 
 #include <QDialog>
 
+#include "xaboutwidget.h"
+
 namespace Ui {
 class DialogAbout;
 }
@@ -33,6 +35,12 @@ class DialogAbout : public QDialog {
 public:
     explicit DialogAbout(QWidget *pParent = nullptr);
     ~DialogAbout();
+
+private:
+    static XAboutWidget::DATA createAboutData();
+
+private slots:
+    void on_pushButtonOK_clicked();
 
 private:
     Ui::DialogAbout *ui;

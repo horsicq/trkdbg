@@ -26,6 +26,13 @@ file(STRINGS ${CMAKE_CURRENT_LIST_DIR}/../release_version.txt X_PROJECT_VERSION)
 project(TrkDbg VERSION ${X_PROJECT_VERSION} LANGUAGES CXX)
 option(USE_DIE "Enable Detect It Easy integration" ON)
 
+# MSBuild otherwise passes hundreds of sources to one serial cl.exe process for
+# each executable. Bound compiler-level parallelism so full Windows builds use
+# the available machine without oversubscribing the two application targets.
+if(MSVC)
+    add_compile_options(/MP8)
+endif()
+
 # --- Project identity variables (used by deploy_init.cmake and RC templates) ---
 set(X_COMPANYNAME "ntinfo")
 set(X_PROJECTNAME "trkdbg")

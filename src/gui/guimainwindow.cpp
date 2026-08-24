@@ -171,6 +171,13 @@ void GuiMainWindow::createMenus()
     menuAction[MA_TOOLS_OPTIONS] = new QAction(tr("Options"), this);
     menuAction[MA_HELP_ABOUT] = new QAction(tr("About"), this);
 
+    // Attach/detach are not implemented yet. Keep their actions inert as well as
+    // hidden so configured shortcuts cannot invoke empty slots.
+    menuAction[MA_FILE_ATTACH]->setVisible(false);
+    menuAction[MA_FILE_ATTACH]->setEnabled(false);
+    menuAction[MA_FILE_DETACH]->setVisible(false);
+    menuAction[MA_FILE_DETACH]->setEnabled(false);
+
     pMenuFile->addAction(menuAction[MA_FILE_OPEN]);
     pMenuFile->addMenu(g_xOptions.createRecentFilesMenu(this));
     pMenuFile->addAction(menuAction[MA_FILE_CLOSE]);
@@ -350,7 +357,7 @@ void GuiMainWindow::actionFileOpen()
 
 void GuiMainWindow::actionFileClose()
 {
-    // TODO
+    ui->widgetDebugger->debugClose();
 }
 
 void GuiMainWindow::actionFileAttach()
@@ -439,10 +446,15 @@ void GuiMainWindow::stateChanged()
 {
     XDebuggerWidget::STATE state = ui->widgetDebugger->getState();
 
-    menuAction[MA_ANIMATE_STEPINTO]->setEnabled(state.bAnimateStepInto);
-    menuAction[MA_ANIMATE_STEPOVER]->setEnabled(state.bAnimateStepOver);
-    menuAction[MA_ANIMATE_STOP]->setEnabled(state.bAnimateStop);
-    menuAction[MA_TRACE_STEPINTO]->setEnabled(state.bTraceStepInto);
-    menuAction[MA_TRACE_STEPOVER]->setEnabled(state.bTraceStepOver);
-    menuAction[MA_TRACE_STOP]->setEnabled(state.bTraceStop);
+    menuAction[MA_FILE_CLOSE]->setEnabled(state.bTargetReady);
+    menuAction[MA_DEBUG_RUN]->setEnabled(state.bTargetReady);
+    menuAction[MA_DEBUG_CLOSE]->setEnabled(state.bTargetReady);
+    menuAction[MA_DEBUG_STEPINTO]->setEnabled(state.bTargetReady);
+    menuAction[MA_DEBUG_STEPOVER]->setEnabled(state.bTargetReady);
+    menuAction[MA_ANIMATE_STEPINTO]->setEnabled(state.bTargetReady && state.bAnimateStepInto);
+    menuAction[MA_ANIMATE_STEPOVER]->setEnabled(state.bTargetReady && state.bAnimateStepOver);
+    menuAction[MA_ANIMATE_STOP]->setEnabled(state.bTargetReady && state.bAnimateStop);
+    menuAction[MA_TRACE_STEPINTO]->setEnabled(state.bTargetReady && state.bTraceStepInto);
+    menuAction[MA_TRACE_STEPOVER]->setEnabled(state.bTargetReady && state.bTraceStepOver);
+    menuAction[MA_TRACE_STOP]->setEnabled(state.bTargetReady && state.bTraceStop);
 }
