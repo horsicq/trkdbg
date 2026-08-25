@@ -75,6 +75,7 @@ GuiMainWindow::GuiMainWindow(QWidget *pParent) : QMainWindow(pParent), ui(new Ui
     connect(&g_xOptions, SIGNAL(errorMessage(QString)), this, SLOT(errorMessageSlot(QString)));
 
     connect(ui->widgetDebugger, SIGNAL(stateChanged()), this, SLOT(stateChanged()));
+    connect(ui->widgetDebugger, &XDebuggerWidget::loadFinished, this, &GuiMainWindow::loadFinishedSlot);
 
     createMenus();
     stateChanged();
@@ -92,6 +93,16 @@ GuiMainWindow::~GuiMainWindow()
     g_xShortcuts.save();
 
     delete ui;
+}
+
+void GuiMainWindow::closeEvent(QCloseEvent *pEvent)
+{
+    if (!ui->widgetDebugger->confirmTargetTermination(tr("A debug target is active or loading. Terminate it and exit the application?"))) {
+        pEvent->ignore();
+        return;
+    }
+
+    QMainWindow::closeEvent(pEvent);
 }
 
 void GuiMainWindow::setShortcuts()
@@ -326,9 +337,14 @@ void GuiMainWindow::handleFile(const QString &sFileName)
     QFileInfo fi(sFileName);
 
     if (fi.isFile()) {
-        if (ui->widgetDebugger->loadFile(sFileName, true)) {
-            g_xOptions.setLastFileName(sFileName);
-        }
+        ui->widgetDebugger->loadFile(sFileName, true);
+    }
+}
+
+void GuiMainWindow::loadFinishedSlot(const QString &sFileName, bool bSuccess)
+{
+    if (bSuccess) {
+        g_xOptions.setLastFileName(sFileName);
     }
 }
 
@@ -445,16 +461,19 @@ void GuiMainWindow::actionViewSymbols()
 void GuiMainWindow::stateChanged()
 {
     XDebuggerWidget::STATE state = ui->widgetDebugger->getState();
+    const bool bCanExecute =
+        state.bTargetReady && state.bTargetPaused && !state.bTargetStopping && !state.bCommandPending && !state.bAnimateStop && !state.bTraceStop;
+    const bool bCanClose = state.bTargetReady && !state.bTargetStopping && !state.bCommandPending;
 
-    menuAction[MA_FILE_CLOSE]->setEnabled(state.bTargetReady);
-    menuAction[MA_DEBUG_RUN]->setEnabled(state.bTargetReady);
-    menuAction[MA_DEBUG_CLOSE]->setEnabled(state.bTargetReady);
-    menuAction[MA_DEBUG_STEPINTO]->setEnabled(state.bTargetReady);
-    menuAction[MA_DEBUG_STEPOVER]->setEnabled(state.bTargetReady);
-    menuAction[MA_ANIMATE_STEPINTO]->setEnabled(state.bTargetReady && state.bAnimateStepInto);
-    menuAction[MA_ANIMATE_STEPOVER]->setEnabled(state.bTargetReady && state.bAnimateStepOver);
+    menuAction[MA_FILE_CLOSE]->setEnabled(bCanClose);
+    menuAction[MA_DEBUG_RUN]->setEnabled(bCanExecute);
+    menuAction[MA_DEBUG_CLOSE]->setEnabled(bCanClose);
+    menuAction[MA_DEBUG_STEPINTO]->setEnabled(bCanExecute);
+    menuAction[MA_DEBUG_STEPOVER]->setEnabled(bCanExecute);
+    menuAction[MA_ANIMATE_STEPINTO]->setEnabled(bCanExecute && state.bAnimateStepInto);
+    menuAction[MA_ANIMATE_STEPOVER]->setEnabled(bCanExecute && state.bAnimateStepOver);
     menuAction[MA_ANIMATE_STOP]->setEnabled(state.bTargetReady && state.bAnimateStop);
-    menuAction[MA_TRACE_STEPINTO]->setEnabled(state.bTargetReady && state.bTraceStepInto);
-    menuAction[MA_TRACE_STEPOVER]->setEnabled(state.bTargetReady && state.bTraceStepOver);
+    menuAction[MA_TRACE_STEPINTO]->setEnabled(bCanExecute && state.bTraceStepInto);
+    menuAction[MA_TRACE_STEPOVER]->setEnabled(bCanExecute && state.bTraceStepOver);
     menuAction[MA_TRACE_STOP]->setEnabled(state.bTargetReady && state.bTraceStop);
 }

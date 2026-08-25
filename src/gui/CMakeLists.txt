@@ -144,6 +144,17 @@ if(UNIX AND NOT APPLE)
         "${CMAKE_CURRENT_SOURCE_DIR}/../../res/linux/hicolor/"
         DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor"
     )
+elseif(APPLE)
+    # Keep the distributable ZIP app-only so it can be stapled and rebuilt
+    # without dropping documentation that was previously installed beside it.
+    install(FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../LICENSE
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../README.md
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../res/license.txt
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../res/readme.txt
+        DESTINATION "${TRKDBG_DATA_INSTALL_DESTINATION}"
+        OPTIONAL
+    )
 else()
     install(FILES
         ${CMAKE_CURRENT_SOURCE_DIR}/../../LICENSE

@@ -21,6 +21,7 @@
 #ifndef GUIMAINWINDOW_H
 #define GUIMAINWINDOW_H
 
+#include <QCloseEvent>
 #include <QDragEnterEvent>
 #include <QFileDialog>
 #include <QMainWindow>
@@ -81,6 +82,7 @@ public:
 private slots:
     void createMenus();
     void handleFile(const QString &sFileName);
+    void loadFinishedSlot(const QString &sFileName, bool bSuccess);
     void errorMessageSlot(const QString &sText);
     void adjustWindow();
     void actionFileOpen();
@@ -113,6 +115,7 @@ private slots:
     void stateChanged();
 
 protected:
+    void closeEvent(QCloseEvent *pEvent) override;
     void dragEnterEvent(QDragEnterEvent *pEvent) override;
     void dragMoveEvent(QDragMoveEvent *pEvent) override;
     void dropEvent(QDropEvent *pEvent) override;

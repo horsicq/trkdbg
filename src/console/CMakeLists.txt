@@ -62,7 +62,12 @@ if(TARGET trkdbg_translations)
     add_dependencies(trkdbgc trkdbg_translations)
 endif()
 
-if(UNIX AND NOT APPLE)
+if(APPLE)
+    # Keep both task-port callers in one self-contained bundle. macdeployqt can
+    # then rewrite the console executable to use the app's private frameworks,
+    # and the release pipeline signs the console before sealing the outer app.
+    install(TARGETS trkdbgc RUNTIME DESTINATION "trkdbg.app/Contents/MacOS")
+elseif(UNIX)
     install(TARGETS trkdbgc RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")
 else()
     install(TARGETS trkdbgc RUNTIME DESTINATION ".")

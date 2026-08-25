@@ -25,6 +25,8 @@
 #include <QFileInfo>
 #include <QTextStream>
 
+#include <atomic>
+
 #include "../global.h"
 #include "xdebugscript.h"
 #include "xdebuggerconsole.h"
@@ -72,6 +74,7 @@ int main(int argc, char *argv[])
 
     const QList<QString> listArgs = parser.positionalArguments();
     QTextStream streamError(stderr);
+    QTextStream streamOutput(stdout);
 
     enum EXIT_CODE {
         EXIT_OK = 0,
@@ -120,6 +123,24 @@ int main(int argc, char *argv[])
         debugger.setOptions(options);
 
         XDebugScript debugScript;
+        std::atomic_bool bScriptError(false);
+
+        QObject::connect(
+            &debugScript, &XDebugScript::infoMessage, &app,
+            [&streamOutput](const QString &sText) {
+                streamOutput << sText << Qt::endl;
+            },
+            Qt::DirectConnection);
+        QObject::connect(
+            &debugScript, &XDebugScript::errorMessage, &app,
+            [&streamError, &bScriptError](const QString &sText) {
+                bScriptError.store(true, std::memory_order_relaxed);
+                streamError << "Error: " << sText << Qt::endl;
+                // Runtime script errors stop Unix debugger polling before an exit event can be
+                // emitted, so also release the console event loop explicitly.
+                QCoreApplication::quit();
+            },
+            Qt::DirectConnection);
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
         // Unix backends are driven by a zero-delay QTimer. Keep the application alive until the
@@ -136,17 +157,28 @@ int main(int argc, char *argv[])
 #endif
 
         if (!debugScript.setData(&debugger, scriptInfo.absoluteFilePath())) {
-            streamError << "Error: failed to load or evaluate script: " << scriptInfo.absoluteFilePath() << Qt::endl;
+            if (!bScriptError.load(std::memory_order_relaxed)) {
+                streamError << "Error: failed to load or evaluate script: " << scriptInfo.absoluteFilePath() << Qt::endl;
+            }
             return EXIT_SCRIPT;
         }
 
-        if (!debugger.load()) {
+        const bool bDebuggerLoaded = debugger.load();
+
+        if (bScriptError.load(std::memory_order_relaxed)) {
+            return EXIT_SCRIPT;
+        }
+
+        if (!bDebuggerLoaded) {
             streamError << "Error: debugger could not start target: " << sFileName << Qt::endl;
             return EXIT_DEBUGGER;
         }
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
         const int nEventLoopResult = bProcessExited ? 0 : app.exec();
+        if (bScriptError.load(std::memory_order_relaxed)) {
+            return EXIT_SCRIPT;
+        }
         if ((nEventLoopResult != 0) || (!bProcessExited)) {
             streamError << "Error: debugger event loop stopped unexpectedly for target: " << sFileName << Qt::endl;
             return EXIT_DEBUGGER;
