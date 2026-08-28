@@ -58,7 +58,6 @@ target_link_libraries(TrkDbg PRIVATE
     lzma
     zlib
     ppmd
-    xarchive_7zip
     capstone
     cppfilt
     yara
