@@ -126,11 +126,7 @@ int main(int argc, char *argv[])
         std::atomic_bool bScriptError(false);
 
         QObject::connect(
-            &debugScript, &XDebugScript::infoMessage, &app,
-            [&streamOutput](const QString &sText) {
-                streamOutput << sText << Qt::endl;
-            },
-            Qt::DirectConnection);
+            &debugScript, &XDebugScript::infoMessage, &app, [&streamOutput](const QString &sText) { streamOutput << sText << Qt::endl; }, Qt::DirectConnection);
         QObject::connect(
             &debugScript, &XDebugScript::errorMessage, &app,
             [&streamError, &bScriptError](const QString &sText) {

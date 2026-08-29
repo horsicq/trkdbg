@@ -461,8 +461,7 @@ void GuiMainWindow::actionViewSymbols()
 void GuiMainWindow::stateChanged()
 {
     XDebuggerWidget::STATE state = ui->widgetDebugger->getState();
-    const bool bCanExecute =
-        state.bTargetReady && state.bTargetPaused && !state.bTargetStopping && !state.bCommandPending && !state.bAnimateStop && !state.bTraceStop;
+    const bool bCanExecute = state.bTargetReady && state.bTargetPaused && !state.bTargetStopping && !state.bCommandPending && !state.bAnimateStop && !state.bTraceStop;
     const bool bCanClose = state.bTargetReady && !state.bTargetStopping && !state.bCommandPending;
 
     menuAction[MA_FILE_CLOSE]->setEnabled(bCanClose);

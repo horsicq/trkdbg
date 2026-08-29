@@ -51,13 +51,9 @@ XAboutWidget::DATA DialogAbout::createAboutData()
     data.sInfo += centeredParagraph(QObject::tr("A cross-platform debugger for executable files"));
     data.sInfo += centeredLink(QObject::tr("Bugreports"), QStringLiteral("horsicq@gmail.com"), QStringLiteral("mailto:horsicq@gmail.com"));
     data.sInfo += centeredLink(QObject::tr("Website"), QStringLiteral("http://ntinfo.biz"), QStringLiteral("http://ntinfo.biz"));
-    data.sInfo += centeredLink(QObject::tr("Source code"),
-                               QStringLiteral("https://github.com/horsicq/trkdbg"),
-                               QStringLiteral("https://github.com/horsicq/trkdbg"));
+    data.sInfo += centeredLink(QObject::tr("Source code"), QStringLiteral("https://github.com/horsicq/trkdbg"), QStringLiteral("https://github.com/horsicq/trkdbg"));
 
-    data.sLibraries += centeredLink(QStringLiteral("Qt Library %1").arg(QT_VERSION_STR),
-                                    QStringLiteral("https://www.qt.io"),
-                                    QStringLiteral("https://www.qt.io"));
+    data.sLibraries += centeredLink(QStringLiteral("Qt Library %1").arg(QT_VERSION_STR), QStringLiteral("https://www.qt.io"), QStringLiteral("https://www.qt.io"));
     data.sLibraries += centeredParagraph(QStringLiteral("Capstone / XEmulator / XInfoDB"));
 
     data.sLogoPath = QStringLiteral(":/images/logo.png");
