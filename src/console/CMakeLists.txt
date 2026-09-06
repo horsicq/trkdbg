@@ -1,5 +1,5 @@
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -7,8 +7,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_definitions(-DUSE_YARA)
 add_definitions(-DUSE_XPROCESS)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../../../_mylibs/XSpecDebugger/xspecdebugger.cmake)
-include(${CMAKE_CURRENT_LIST_DIR}/../../../_mylibs/XDebugScript/xdebugscript.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XSpecDebugger/xspecdebugger.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/../../dep/XDebugScript/xdebugscript.cmake)
 
 if(UNIX AND NOT APPLE)
     include(GNUInstallDirs)
