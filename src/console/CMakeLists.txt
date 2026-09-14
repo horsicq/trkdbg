@@ -21,10 +21,6 @@ add_executable(trkdbgc
 )
 
 target_link_libraries(trkdbgc PRIVATE
-    bzip2
-    lzma
-    zlib
-    ppmd
     capstone
     cppfilt
     yara

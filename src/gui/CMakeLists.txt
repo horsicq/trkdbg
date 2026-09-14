@@ -51,10 +51,6 @@ set_target_properties(TrkDbg PROPERTIES
 target_include_directories(TrkDbg PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(TrkDbg PRIVATE
-    bzip2
-    lzma
-    zlib
-    ppmd
     capstone
     cppfilt
     yara
